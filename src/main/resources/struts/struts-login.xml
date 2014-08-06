@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="login" namespace="/login" extends="struts-default">
+
+        <action name="login" class="com.demo.basic.action.LoginAction" method="login">
+            <result name="login">/WEB-INF/pages/login/login.jsp</result>
+        </action>
+
+        <action name="welcome" class="com.demo.basic.action.LoginAction" method="welcome">
+            <result name="welcome">/WEB-INF/pages/login/welcome.jsp</result>
+            <result name="login">/WEB-INF/pages/login/login.jsp</result>
+        </action>
+
+
+        <!--<action name="findPurviewList" class="com.demo.basic.action.LoginAction" method="findPurviewList">
+            <result name="findPurviewList" type="json">
+                <param name="purviewVoList">json</param>
+            </result>
+        </action>-->
+
+    </package>
+
+</struts>

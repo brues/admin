@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.basic.mapper.UserMapper">
+
+    <select id="findByUserNameAndPassword" resultType="com.demo.basic.entity.User" parameterType="com.demo.basic.entity.User">
+        select * from admin_user where userName=#{userName} and password=#{password}
+    </select>
+
+    <select id="userList" resultType="com.demo.basic.entity.User">
+        select * from admin_user
+    </select>
+
+    <delete id="deleteUserById" parameterType="java.lang.Long">
+        delete from admin_user where id=#{id}
+    </delete>
+
+    <insert id="saveUser">
+        insert into admin_user (userName,password,trueName,phone,email,registerDate,comments)
+        values(#{userName},#{password},#{trueName},#{phone},#{email},#{registerDate},${comments})
+    </insert>
+
+    <update id="updateUser">
+        update admin_user
+        set userName=#{userName}, trueName=#{trueName}, phone=#{phone}, email=#{email}, registerDate=#{registerDate}, comments=#{comments} where id=#{id}
+    </update>
+</mapper>

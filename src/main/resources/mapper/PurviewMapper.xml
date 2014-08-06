@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.basic.mapper.PurviewMapper">
+
+    <select id="findListByParentId" parameterType="java.lang.Long" resultType="com.demo.basic.entity.Purview">
+        select * from admin_purview where parentId=#{parentId}
+    </select>
+
+    <select id="findById" parameterType="java.lang.Long" resultType="com.demo.basic.entity.Purview">
+        select * from admin_purview where id=#{id}
+    </select>
+</mapper>

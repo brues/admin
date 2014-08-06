@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="basic" namespace="/basic" extends="struts-default">
+
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+
+        <action name="findPurviewById" class="com.demo.basic.action.PurviewAction" method="findPurviewById">
+            <result name="findPurviewById" type="json">
+                <param name="purview">json</param>
+            </result>
+        </action>
+
+        <action name="userList" class="com.demo.basic.action.UsersAction" method="userList">
+            <result name="userList">/WEB-INF/pages/basic/user/usersList.jsp</result>
+        </action>
+
+
+        <action name="findUserList" class="com.demo.basic.action.UsersAction" method="findUserList">
+            <result name="findUserList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+        <action name="deleteUserById" class="com.demo.basic.action.UsersAction" method="deleteUserById">
+            <result name="deleteUserById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateUser" class="com.demo.basic.action.UsersAction" method="saveOrUpdateUser">
+            <result name="saveOrUpdateUser" type="json"></result>
+        </action>
+
+        <action name="purviewList" class="com.demo.basic.action.PurviewAction" method="purviewList">
+            <result name="purviewList">/WEB-INF/pages/basic/purview/purviewList.jsp</result>
+        </action>
+
+        <action name="actorList" class="com.demo.basic.action.ActorAction" method="actorList">
+            <result name="actorList">/WEB-INF/pages/basic/actor/actorList.jsp</result>
+        </action>
+    </package>
+
+</struts>
