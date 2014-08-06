@@ -4,4 +4,20 @@
 
 <mapper namespace="com.demo.basic.mapper.ActorMapper">
 
+    <select id="actorList" resultType="com.demo.basic.entity.Actor">
+        select * from admin_actor
+    </select>
+
+    <delete id="deleteActorById" parameterType="java.lang.Long" >
+        delete from admin_actor where id=#{id}
+    </delete>
+
+    <insert id="addActor">
+        insert into admin_actor (actorName) values(#{actorName})
+    </insert>
+
+    <update id="updateActor">
+        update admin_actor set actorName=#{actorName} where id=#{id}
+    </update>
+
 </mapper>

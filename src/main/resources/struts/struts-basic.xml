@@ -43,6 +43,20 @@
         <action name="actorList" class="com.demo.basic.action.ActorAction" method="actorList">
             <result name="actorList">/WEB-INF/pages/basic/actor/actorList.jsp</result>
         </action>
+
+        <action name="findActorList" class="com.demo.basic.action.ActorAction" method="findActorList">
+            <result name="findActorList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+        <action name="deleteActorById" class="com.demo.basic.action.ActorAction" method="deleteActorById">
+            <result name="deleteActorById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateActor" class="com.demo.basic.action.ActorAction" method="saveOrUpdateActor">
+            <result name="saveOrUpdateActor" type="json"></result>
+        </action>
     </package>
 
 </struts>
