@@ -9,224 +9,158 @@
 %>
 
 <html>
-	<head>
-		<title>权限分类</title>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery-easyui/themes/default/easyui.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery-easyui/themes/icon.css"/>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery-easyui/demo/demo.css"/>
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery-easyui/themes/color.css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery-easyui/jquery.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery-easyui/jquery.easyui.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery-easyui/easyloader.js"></script>
+    <head>
+        <title>权限分类</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/ztree/css/demo.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.core-3.5.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.exedit-3.5.js"></script>
+        <SCRIPT type="text/javascript">
+            <!--
+            var setting = {
+                view: {
+                    addHoverDom: addHoverDom,
+                    removeHoverDom: removeHoverDom,
+                    selectedMulti: false
+                },
+                edit: {
+                    enable: true
+                },
+                data: {
+                    simpleData: {
+                        enable: true
+                    }
+                },
+                callback: {
+                    beforeDrag: beforeDrag,
+                    beforeEditName: beforeEditName,
+                    beforeRemove: beforeRemove,
+                    beforeRename: beforeRename,
+                    onRemove: onRemove,
+                    onRename: onRename
+                }
+            };
 
-        <script type="text/javascript">
-            function formatEffective(value) {
-                if (value == 0) {
-                    return "无效";
-                } else {
-                    return "有效";
+            var zNodes = [{id:0,name:"根节点"}];
+
+
+
+            var log, className = "dark";
+            function beforeDrag(treeId, treeNodes) {
+                return false;
+            }
+            function beforeEditName(treeId, treeNode) {
+                className = (className === "dark" ? "":"dark");
+                showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.selectNode(treeNode);
+                return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+            }
+            function beforeRemove(treeId, treeNode) {
+                className = (className === "dark" ? "":"dark");
+                showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.selectNode(treeNode);
+                return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+            }
+            function onRemove(e, treeId, treeNode) {
+                showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+            }
+            function beforeRename(treeId, treeNode, newName, isCancel) {
+                className = (className === "dark" ? "":"dark");
+                showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+                if (newName.length == 0) {
+                    alert("节点名称不能为空.");
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    setTimeout(function(){zTree.editName(treeNode)}, 10);
+                    return false;
+                }
+                return true;
+            }
+            function onRename(e, treeId, treeNode, isCancel) {
+                showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+            }
+            function showRemoveBtn(treeId, treeNode) {
+                return !treeNode.isFirstNode;
+            }
+            function showRenameBtn(treeId, treeNode) {
+                return !treeNode.isLastNode;
+            }
+            function showLog(str) {
+                if (!log) log = $("#log");
+                log.append("<li class='"+className+"'>"+str+"</li>");
+                if(log.children("li").length > 8) {
+                    log.get(0).removeChild(log.children("li")[0]);
                 }
             }
-            var editingId;
-            function edit() {
-
-                var tg = $('#tg');
-                if (editingId != undefined) {
-                    tg.treegrid('select', editingId);
-                    return;
-                }
-                var row = tg.treegrid('getSelected');
-                if (row) {
-                    editingId = row.id;
-                    tg.treegrid('beginEdit', editingId);
-                }
+            function getTime() {
+                var now= new Date(),
+                        h=now.getHours(),
+                        m=now.getMinutes(),
+                        s=now.getSeconds(),
+                        ms=now.getMilliseconds();
+                return (h+":"+m+":"+s+ " " +ms);
             }
-            function save() {
-                if (editingId != undefined) {
 
-                    var t = $('#tg');
-
-                    t.treegrid('endEdit', editingId);
-                    editingId = undefined;
-
-                    var row = t.treegrid('getSelected');
-
-                    var param = {
-                        'resourceMenu.id': row.id,
-                        'resourceMenu.description': row.description,
-                        'resourceMenu.effective': row.effective,
-                        'resourceMenu.leaf': row.leaf,
-                        'resourceMenu.menucode': row.menucode,
-                        'resourceMenu.parameter': row.parameter,
-                        'resourceMenu.text': row.text,
-                        'resourceMenu.url': row.url
-                    };
-                    $.post(
-                            "${pageContext.request.contextPath}/manage/permission/saveResourceMenuAjax.action",
-                            jQuery.param(param),
-                            function (data) {
-                                if (data.status == "success") {
-                                    alert("保存成功");
-                                } else {
-                                    alert(data.status);
-                                }
-                            }
-                    );
-                }
-            }
-            function cancel() {
-                if (editingId != undefined) {
-                    $('#tg').treegrid('cancelEdit', editingId);
-                    editingId = undefined;
-                }
-            }
-            function onContextMenu(e, row) {
-                e.preventDefault();
-                $(this).treegrid('select', row.id);
-                $('#mm').menu('show', {
-                    left: e.pageX,
-                    top: e.pageY
+            var newCount = 1;
+            function addHoverDom(treeId, treeNode) {
+                var sObj = $("#" + treeNode.tId + "_span");
+                if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+                var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                        + "' title='add node' onfocus='this.blur();'></span>";
+                sObj.after(addStr);
+                var btn = $("#addBtn_"+treeNode.tId);
+                if (btn) btn.bind("click", function(){
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+                    return false;
                 });
+            };
+
+            function addOneHoverDom(treeId, treeNode) {
+                zNodes[zNodes.length]={id:(parseInt(zNodes[zNodes.length-1].id)+1),pId:0,name:"new one"};
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            };
+            function removeHoverDom(treeId, treeNode) {
+                $("#addBtn_"+treeNode.tId).unbind().remove();
+            };
+            function selectAll() {
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
             }
-            function append() {
 
-                var tg = $('#tg');
-                var node = tg.treegrid('getSelected');
-                tg.treegrid('expand',node.id);
-                var param = {
-                    'resourceMenu.effective': 1,
-                    'resourceMenu.text': '新增菜单',
-                    'pid': node.id
-                };
+            $(document).ready(function(){
+                $.ajax({
+                    url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
+                    dataType:"json",
+                    success:function(data){
+                        for(i=0;i<data.purviewList.length;i++){
+                            zNodes[i]={id:data.purviewList[i].id,pId:data.purviewList[i].parentId,name:data.purviewList[i].purviewName};
+                        }
+                        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                        $("#selectAll").bind("click", selectAll);
+                    }
+                });
 
-                if (confirm("确定增加子菜单吗？")) {
-                    $.post(
-                            "${pageContext.request.contextPath}/manage/permission/addResourceMenuAjax.action",
-                            jQuery.param(param),
-                            function (data) {
-                                if (data.status == "success") {
-                                    tg.treegrid('append', {
-                                        parent: node.id,
-                                        data: [
-                                            {
-                                                id: data.resourceMenu.id,
-                                                text: data.resourceMenu.text,
-                                                menucode: data.resourceMenu.menucode,
-                                                url: data.resourceMenu.url,
-                                                parameter: data.resourceMenu.parameter,
-                                                effective: data.resourceMenu.effective,
-                                                description: data.resourceMenu.description
-                                            }
-                                        ]
-                                    });
-                                    editingId = data.resourceMenu.id;
+            });
+            //-->
+        </SCRIPT>
+        <style type="text/css">
+            .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+        </style>
+    </HEAD>
 
-                                    tg.treegrid('select',editingId);
-                                    tg.treegrid('beginEdit', editingId);
-
-                                } else {
-                                    alert(data.status);
-                                }
-                            }
-                    );
-                }
-
-            }
-            function appendRoot() {
-
-                var tg = $('#tg');
-                var param = {
-                    'resourceMenu.effective': 1,
-                    'resourceMenu.text': '新增根菜单'
-                };
-
-                if (confirm("确定增加根菜单吗？")) {
-                    $.post(
-                            "${pageContext.request.contextPath}/manage/permission/addResourceMenuAjax.action",
-                            jQuery.param(param),
-                            function (data) {
-                                if (data.status == "success") {
-                                    tg.treegrid('append', {
-                                        data: [
-                                            {
-                                                id: data.resourceMenu.id,
-                                                text: data.resourceMenu.text,
-                                                menucode: data.resourceMenu.menucode,
-                                                url: data.resourceMenu.url,
-                                                parameter: data.resourceMenu.parameter,
-                                                effective: data.resourceMenu.effective,
-                                                description: data.resourceMenu.description
-                                            }
-                                        ]
-                                    });
-                                    editingId = data.resourceMenu.id;
-
-                                    tg.treegrid('select',editingId);
-                                    tg.treegrid('beginEdit', editingId);
-
-                                } else {
-                                    alert(data.status);
-                                }
-                            }
-                    );
-                }
-
-            }
-            function removeMenu() {
-                var tg = $('#tg');
-                var node = tg.treegrid('getSelected');
-
-                if (confirm("确定删除菜单吗？")) {
-
-                    $.post(
-                            "${pageContext.request.contextPath}/manage/permission/removeResourceMenuAjax.action",
-                            {
-                                "id":node.id
-                            },
-                            function (data) {
-                                if (data.status == "success") {
-                                    tg.treegrid('remove', node.id);
-                                } else {
-                                    alert(data.status);
-                                }
-                            }
-                    );
-                }
-            }
-        </script>
-	</head>
-    <body>
-
-    <table id="tg" class="easyui-treegrid" style="min-height: 300px;"
-           data-options=" url:'${pageContext.request.contextPath}/manage/permission/resourceMenuList.action',
-                      method:'get',
-                      rownumbers:true,
-                      idField:'id',
-                      treeField:'text',
-                      onContextMenu: onContextMenu"
-            >
-        <thead>
-        <tr>
-            <th data-options="field:'text',editor:'text'">名称</th>
-            <th data-options="field:'menucode'">编码</th>
-            <th data-options="field:'url',editor:'text'">URL</th>
-            <th data-options="field:'parameter',editor:'text'">参数</th>
-            <th data-options="field:'effective',formatter:formatEffective,editor:{type:'checkbox',options:{on:'1',off:'0'}}">有效</th>
-            <th data-options="field:'description',editor:'text'">说明</th>
-        </tr>
-        </thead>
-    </table>
-
-    <div id="mm" class="easyui-menu" style="width:120px;">
-        <div onclick="edit()" data-options="iconCls:'icon-edit'">编辑</div>
-        <div onclick="save()" data-options="iconCls:'icon-save'">保存</div>
-        <div onclick="cancel()" data-options="iconCls:'icon-undo'">取消</div>
-        <div class="menu-sep"></div>
-        <div onclick="append()" data-options="iconCls:'icon-add'">增加子菜单</div>
-        <div onclick="appendRoot()" data-options="iconCls:'icon-add'">增加根菜单</div>
-        <div class="menu-sep"></div>
-        <div onclick="removeMenu()" data-options="iconCls:'icon-cancel'">删除</div>
-    </div>
-
-    </body>
-</html>
+    <BODY>
+        <div class="content_wrap">
+            <div class="zTreeDemoBackground">
+                <span>权限分类</span>
+                <a href="javascript:addOneHoverDom()">
+                    添加一级分类
+                </a>
+                <ul id="treeDemo" class="ztree"></ul>
+            </div>
+        </div>
+    </BODY>
+</HTML>

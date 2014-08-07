@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Created by guoyibin on 7/25/14.
+ *
+ *
  */
 @Service
 public class PurviewService {
@@ -23,5 +25,9 @@ public class PurviewService {
 
     public Purview findById(Long id){
         return purviewDao.findById(id);
+    }
+
+    public List<Purview> findPurviewList() {
+        return purviewDao.findPurviewList();
     }
 }

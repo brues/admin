@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/jquery-easyui/demo/demo.css"/>
         <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery-easyui/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery-easyui/plugins/jquery.validatebox.js"></script>
         <script type="text/javascript">
             function login(){
                 $("#loginForm").attr("action","${pageContext.request.contextPath}/login/welcome.action");

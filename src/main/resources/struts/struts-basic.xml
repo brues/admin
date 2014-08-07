@@ -17,6 +17,16 @@
             </result>
         </action>
 
+        <action name="findListByParentId" class="com.demo.basic.action.PurviewAction" method="findListByParentId">
+            <result name="findListByParentId" type="json"><param name="map">json</param></result>
+        </action>
+
+
+
+
+
+
+
         <action name="userList" class="com.demo.basic.action.UsersAction" method="userList">
             <result name="userList">/WEB-INF/pages/basic/user/usersList.jsp</result>
         </action>
@@ -36,9 +46,26 @@
             <result name="saveOrUpdateUser" type="json"></result>
         </action>
 
+
+
+
+
+
         <action name="purviewList" class="com.demo.basic.action.PurviewAction" method="purviewList">
             <result name="purviewList">/WEB-INF/pages/basic/purview/purviewList.jsp</result>
         </action>
+        <action name="findPurviewList" class="com.demo.basic.action.PurviewAction" method="findPurviewList">
+            <result name="findPurviewList" type="json">
+                <param name="purviewList">json</param>
+            </result>
+        </action>
+
+
+
+
+
+
+
 
         <action name="actorList" class="com.demo.basic.action.ActorAction" method="actorList">
             <result name="actorList">/WEB-INF/pages/basic/actor/actorList.jsp</result>
@@ -57,6 +84,7 @@
         <action name="saveOrUpdateActor" class="com.demo.basic.action.ActorAction" method="saveOrUpdateActor">
             <result name="saveOrUpdateActor" type="json"></result>
         </action>
+
     </package>
 
 </struts>

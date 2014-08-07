@@ -11,4 +11,8 @@
     <select id="findById" parameterType="java.lang.Long" resultType="com.demo.basic.entity.Purview">
         select * from admin_purview where id=#{id}
     </select>
+
+    <select id="findPurviewList" resultType="com.demo.basic.entity.Purview">
+        select * from admin_purview
+    </select>
 </mapper>

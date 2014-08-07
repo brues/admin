@@ -15,4 +15,6 @@ public interface PurviewMapper{
     public List<Purview> findListByParentId(Long parentId);
 
     public Purview findById(Long id);
+
+    public List<Purview> findPurviewList();
 }
