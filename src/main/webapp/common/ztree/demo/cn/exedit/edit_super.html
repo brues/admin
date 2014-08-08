@@ -57,6 +57,7 @@
 			return false;
 		}
 		function beforeEditName(treeId, treeNode) {
+            alert(0)
 			className = (className === "dark" ? "":"dark");
 			showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
@@ -74,6 +75,7 @@
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 		}
 		function beforeRename(treeId, treeNode, newName, isCancel) {
+            alert(1)
 			className = (className === "dark" ? "":"dark");
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 			if (newName.length == 0) {

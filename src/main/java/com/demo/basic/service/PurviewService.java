@@ -30,4 +30,16 @@ public class PurviewService {
     public List<Purview> findPurviewList() {
         return purviewDao.findPurviewList();
     }
+
+    public void deletePurviewById(Long id) {
+        purviewDao.deletePurviewById(id);
+    }
+
+    public void saveOrUpdatePurview(Purview purview) {
+        if (purview.getId()==null){
+            purviewDao.add(purview);
+        }else{
+            purviewDao.update(purview);
+        }
+    }
 }

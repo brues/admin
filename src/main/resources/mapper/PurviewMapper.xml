@@ -15,4 +15,17 @@
     <select id="findPurviewList" resultType="com.demo.basic.entity.Purview">
         select * from admin_purview
     </select>
+
+    <delete id="deletePurviewById" parameterType="java.lang.Long">
+        delete from admin_purview where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.basic.entity.Purview">
+        insert into admin_purview(purviewName,parentId,url,isLeaf)
+        values(#{purviewName},#{parentId},#{url},#{isLeaf})
+    </insert>
+
+    <update id="update" parameterType="com.demo.basic.entity.Purview">
+        update admin_purview set purviewName=#{purviewName},url=#{url} where id=#{id}
+    </update>
 </mapper>

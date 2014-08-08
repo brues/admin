@@ -10,7 +10,7 @@ import com.demo.base.entity.BaseEntity;
 public class Purview extends BaseEntity {
 
     private String purviewName;//权限名称
-    private Integer parentId;//父ID
+    private Long parentId;//父ID
     private String url;//路径
     private String isLeaf;
 
@@ -23,11 +23,11 @@ public class Purview extends BaseEntity {
         this.purviewName = purviewName;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

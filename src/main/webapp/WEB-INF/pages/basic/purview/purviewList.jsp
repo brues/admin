@@ -7,160 +7,183 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<HTML>
+<HEAD>
+    <TITLE>权限管理</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/color.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
 
-<html>
-    <head>
-        <title>权限分类</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/ztree/css/demo.css" type="text/css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery-1.4.4.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.core-3.5.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/common/ztree/js/jquery.ztree.exedit-3.5.js"></script>
-        <SCRIPT type="text/javascript">
-            <!--
-            var setting = {
-                view: {
-                    addHoverDom: addHoverDom,
-                    removeHoverDom: removeHoverDom,
-                    selectedMulti: false
+    <style type="text/css">
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+        }
+        .fitem input{
+            width:160px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var url;
+        function newPurview(){
+            $('#dlg').dialog('open').dialog('setTitle','添加权限');
+            $('#fm').form('clear');
+            url = '${pageContext.request.contextPath}/basic/saveOrUpdatePurview.action?parentId='+$("#paramId").val();
+        }
+        function editPurview(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $('#dlg').dialog('open').dialog('setTitle','Edit Purview');
+                $('#fm').form('load',row);
+                url = '${pageContext.request.contextPath}/basic/saveOrUpdatePurview.action?parentId='+$("#paramId").val();
+            }
+        }
+        function savePurview(){
+            $('#fm').form('submit',{
+                url: url,
+                onSubmit: function(){
+                    return $(this).form('validate');
                 },
-                edit: {
-                    enable: true
-                },
-                data: {
-                    simpleData: {
-                        enable: true
-                    }
-                },
-                callback: {
-                    beforeDrag: beforeDrag,
-                    beforeEditName: beforeEditName,
-                    beforeRemove: beforeRemove,
-                    beforeRename: beforeRename,
-                    onRemove: onRemove,
-                    onRename: onRename
+                success: function(result){
+                    $('#dlg').dialog('close');
+                    dataLoads();
                 }
-            };
-
-            var zNodes = [{id:0,name:"根节点"}];
-
-
-
-            var log, className = "dark";
-            function beforeDrag(treeId, treeNodes) {
-                return false;
-            }
-            function beforeEditName(treeId, treeNode) {
-                className = (className === "dark" ? "":"dark");
-                showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
-                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                zTree.selectNode(treeNode);
-                return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
-            }
-            function beforeRemove(treeId, treeNode) {
-                className = (className === "dark" ? "":"dark");
-                showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
-                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                zTree.selectNode(treeNode);
-                return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
-            }
-            function onRemove(e, treeId, treeNode) {
-                showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
-            }
-            function beforeRename(treeId, treeNode, newName, isCancel) {
-                className = (className === "dark" ? "":"dark");
-                showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
-                if (newName.length == 0) {
-                    alert("节点名称不能为空.");
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    setTimeout(function(){zTree.editName(treeNode)}, 10);
-                    return false;
-                }
-                return true;
-            }
-            function onRename(e, treeId, treeNode, isCancel) {
-                showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
-            }
-            function showRemoveBtn(treeId, treeNode) {
-                return !treeNode.isFirstNode;
-            }
-            function showRenameBtn(treeId, treeNode) {
-                return !treeNode.isLastNode;
-            }
-            function showLog(str) {
-                if (!log) log = $("#log");
-                log.append("<li class='"+className+"'>"+str+"</li>");
-                if(log.children("li").length > 8) {
-                    log.get(0).removeChild(log.children("li")[0]);
-                }
-            }
-            function getTime() {
-                var now= new Date(),
-                        h=now.getHours(),
-                        m=now.getMinutes(),
-                        s=now.getSeconds(),
-                        ms=now.getMilliseconds();
-                return (h+":"+m+":"+s+ " " +ms);
-            }
-
-            var newCount = 1;
-            function addHoverDom(treeId, treeNode) {
-                var sObj = $("#" + treeNode.tId + "_span");
-                if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-                var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-                        + "' title='add node' onfocus='this.blur();'></span>";
-                sObj.after(addStr);
-                var btn = $("#addBtn_"+treeNode.tId);
-                if (btn) btn.bind("click", function(){
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
-                    return false;
-                });
-            };
-
-            function addOneHoverDom(treeId, treeNode) {
-                zNodes[zNodes.length]={id:(parseInt(zNodes[zNodes.length-1].id)+1),pId:0,name:"new one"};
-                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            };
-            function removeHoverDom(treeId, treeNode) {
-                $("#addBtn_"+treeNode.tId).unbind().remove();
-            };
-            function selectAll() {
-                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
-            }
-
-            $(document).ready(function(){
-                $.ajax({
-                    url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
-                    dataType:"json",
-                    success:function(data){
-                        for(i=0;i<data.purviewList.length;i++){
-                            zNodes[i]={id:data.purviewList[i].id,pId:data.purviewList[i].parentId,name:data.purviewList[i].purviewName};
-                        }
-                        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                        $("#selectAll").bind("click", selectAll);
-                    }
-                });
-
             });
-            //-->
-        </SCRIPT>
-        <style type="text/css">
-            .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
-        </style>
-    </HEAD>
+        }
+        function destroyPurview(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('提示框','确定删除此记录吗?',function(r){
+                    if (r){
+                        $.ajax({
+                            url:"${pageContext.request.contextPath}/basic/deletePurviewById.action",
+                            data:{id:row.id,parentId:$("#paramId").val()},
+                            success:function(data){
+                                dataLoads();
+                            },
+                            error:function(){
+                                dataLoads();
+                            }
+                        });
+                    }
+                });
+            }
+        }
 
-    <BODY>
-        <div class="content_wrap">
-            <div class="zTreeDemoBackground">
-                <span>权限分类</span>
-                <a href="javascript:addOneHoverDom()">
-                    添加一级分类
-                </a>
-                <ul id="treeDemo" class="ztree"></ul>
-            </div>
+        function seeChilds(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                window.location.href="${pageContext.request.contextPath}/basic/purviewList.action?id="+row.id;
+            }
+
+        }
+
+        function seeParent(){
+            window.location.href="${pageContext.request.contextPath}/basic/purviewList.action?id=0";
+        }
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        $(function(){
+            dataLoads();
+        });
+
+        function dataLoads(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/basic/findListByParentId.action?parentId="+$("#paramId").val(),
+                dataType:"json",
+                success:function(data){
+                    $('#dg').datagrid({
+                        data:data.map
+
+                    })
+                }
+            });
+        }
+
+
+        $(document).ready(function(){
+            if($("#paramId").val()!=0){
+                $("#seeChildA").css("display","none");
+            }else{
+                $("#seeParentA").css("display","none");
+            }
+        });
+
+
+    </script>
+</head>
+<body>
+<input type="hidden" id="paramId" value="${id}" />
+<h2>权限管理</h2>
+<p></p>
+
+<table id="dg" title="权限列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="purviewName" width="50" align="center">权限名称</th>
+        <th field="url" width="50" align="center">url</th>
+    </tr>
+    </thead>
+</table>
+<%--<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+     data-options="total:2000,pageSize:10">
+</div>--%>
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newPurview()">添加权限</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editPurview()">编辑权限</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyPurview()">删除权限</a>
+    <a id="seeChildA" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="seeChilds()">查看子权限</a>
+    <a id="seeParentA" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="seeParent()">查看父权限</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:500px;height:250px;padding:10px 20px"
+     closed="true" buttons="#dlg-buttons">
+    <div class="ftitle">权限信息</div>
+    <form id="fm" method="post" name="purview">
+        <div class="fitem" style="display: none;">
+            <label>权限Id:</label>
+            <input name="id" class="easyui-textbox" required="true" >
         </div>
-    </BODY>
-</HTML>
+        <div class="fitem">
+            <label>权限名称:</label>
+            <input name="purviewName" style="width: 250px;" class="easyui-textbox" required="true" >
+        </div>
+        <div class="fitem">
+            <label>url:</label>
+            <input name="url" style="width: 250px;" class="easyui-textbox">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="savePurview()" style="width:90px">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+</div>
+
+
+</body>
+</html>

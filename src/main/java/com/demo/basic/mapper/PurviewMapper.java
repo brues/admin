@@ -17,4 +17,10 @@ public interface PurviewMapper{
     public Purview findById(Long id);
 
     public List<Purview> findPurviewList();
+
+    public void deletePurviewById(Long id);
+
+    public void add(Purview purview);
+
+    public void update(Purview purview);
 }

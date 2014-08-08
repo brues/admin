@@ -60,6 +60,14 @@
             </result>
         </action>
 
+        <action name="deletePurviewById" class="com.demo.basic.action.PurviewAction" method="deletePurviewById">
+            <result name="deletePurviewById" type="json"></result>
+        </action>
+
+
+        <action name="saveOrUpdatePurview" class="com.demo.basic.action.PurviewAction" method="saveOrUpdatePurview">
+            <result name="saveOrUpdatePurview" type="json"></result>
+        </action>
 
 
 
@@ -70,6 +78,7 @@
         <action name="actorList" class="com.demo.basic.action.ActorAction" method="actorList">
             <result name="actorList">/WEB-INF/pages/basic/actor/actorList.jsp</result>
         </action>
+
 
         <action name="findActorList" class="com.demo.basic.action.ActorAction" method="findActorList">
             <result name="findActorList" type="json">
