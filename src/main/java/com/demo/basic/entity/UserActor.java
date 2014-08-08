@@ -9,24 +9,34 @@ import com.demo.base.entity.BaseEntity;
  */
 public class UserActor extends BaseEntity {
 
-    private Integer userId;//管理员ID
-    private Integer actorId;//角色ID
-    private String actorName;//角色名称
+    private Long userId;//用户ID
+    private Long actorId;//角色ID
 
-    public Integer getUserId() {
+    private String userName;
+    private String actorName;
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getActorId() {
+    public Long getActorId() {
         return actorId;
     }
 
-    public void setActorId(Integer actorId) {
+    public void setActorId(Long actorId) {
         this.actorId = actorId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getActorName() {
@@ -36,5 +46,4 @@ public class UserActor extends BaseEntity {
     public void setActorName(String actorName) {
         this.actorName = actorName;
     }
-
 }

@@ -4,4 +4,30 @@
 
 <mapper namespace="com.demo.basic.mapper.UserActorMapper">
 
+    <select id="findByUserId"  parameterType="java.lang.Long" resultType="com.demo.basic.entity.UserActor">
+        select * from admin_userActor where userId=#{userId}
+    </select>
+
+    <insert id="add" parameterType="com.demo.basic.entity.UserActor">
+        insert into admin_userActor(userId,actorId) values(#{userId},#{actorId})
+    </insert>
+
+    <update id="update" parameterType="com.demo.basic.entity.UserActor">
+        update admin_userActor set actorId=#{actorId} where userId=#{userId}
+    </update>
+
+    <select id="findActorByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select actorId from admin_userActor where userId=#{userId}
+    </select>
+
+    <delete id="deleteUserActorById" parameterType="java.lang.Long">
+        delete from admin_userActor where id=#{id}
+    </delete>
+
+    <select id="userActorList" resultType="com.demo.basic.entity.UserActor">
+        select id,
+        (select userName from admin_user a where a.id=u.userId) userName,
+        (select actorName from admin_actor b where b.id=u.actorId) actorName
+        from admin_userActor u
+    </select>
 </mapper>

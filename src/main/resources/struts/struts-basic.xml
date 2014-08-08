@@ -94,6 +94,34 @@
             <result name="saveOrUpdateActor" type="json"></result>
         </action>
 
+
+
+
+        <action name="saveOrUpdateUserActor" class="com.demo.basic.action.UsersActorAction" method="saveOrUpdateUserActor">
+            <result name="saveOrUpdateUserActor" type="json"></result>
+        </action>
+
+        <action name="findActorByUserId" class="com.demo.basic.action.UsersActorAction" method="findActorByUserId">
+            <result name="findActorByUserId" type="json"></result>
+        </action>
+
+
+        <action name="deleteUserActorById" class="com.demo.basic.action.UsersActorAction" method="deleteUserActorById">
+            <result name="deleteUserActorById" type="json"></result>
+        </action>
+
+
+        <action name="findUserActorList" class="com.demo.basic.action.UsersActorAction" method="findUserActorList">
+            <result name="findUserActorList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+
+        <action name="userActorList" class="com.demo.basic.action.UsersActorAction" method="userActorList">
+            <result name="userActorList">/WEB-INF/pages/basic/userActor/usersActorList.jsp</result>
+        </action>
+
     </package>
 
 </struts>

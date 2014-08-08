@@ -90,10 +90,60 @@
                 });
             }
         }
+
+        function userActor(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                var row = $('#dg').datagrid('getSelected');
+                $("#userActorHidden").val(row.id);
+                $.ajax({
+                    url:"${pageContext.request.contextPath}/basic/findActorByUserId.action?userId="+row.id,
+                    dataType:"json",
+                    success:function(data){
+                        var len=$("#actorSelect option").length;
+                        for(i=0;i<len;i++){
+                            var va=$("#actorSelect option:eq("+i+")").val();
+                            if(parseInt(va)==parseInt(data.actorId)){
+                                $("#actorSelect option:eq("+i+")").attr("selected","selected");
+                            }
+                        }
+                        $('#actorDg').dialog('open').dialog('setTitle','分配角色');
+                    }
+                });
+
+            }
+        }
+
+        function saveUserActor(){
+            $('#actorDgForm').form('submit',{
+                url: "${pageContext.request.contextPath}/basic/saveOrUpdateUserActor.action",
+                onSubmit: function(){
+                    return $(this).form('validate');
+                },
+                success: function(result){
+                    $('#actorDg').dialog('close');
+                    dataLoads();
+                    $("#actorSelect option:eq(0)").attr("selected","selected");
+                }
+            });
+        }
     </script>
 
 
     <script type="text/javascript">
+
+        $(document).ready(function(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/basic/findActorList.action",
+                dataType:"json",
+                success:function(data){
+                    for(var i=0;i<data.map.rows.length;i++){
+                        $("#actorSelect").append("<option value='"+data.map.rows[i].id+"'>"+data.map.rows[i].actorName+"</option>");
+                    }
+                }
+            });
+        });
+
         $(function(){
             dataLoads();
         });
@@ -106,17 +156,15 @@
                     $('#dg').datagrid({
                         data:data.map
 
-                    })/*.pagination({
-                        beforePageText:"",
-                        afterPageText:"",
-                        refresh:function(){
-                            alert(0);
-                        }
-                    });*/
+                    })
+
                 }
             });
         }
 
+        function userActorList(){
+            window.location.href="${pageContext.request.contextPath}/basic/userActorList.action";
+        }
     </script>
 </head>
 <body>
@@ -142,6 +190,8 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加用户</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑用户</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除用户</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="userActor()">分配角色</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="userActorList()">角色列表</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:320px;padding:10px 20px"
@@ -169,6 +219,20 @@
             <input name="comments" class="easyui-textbox">
         </div>
     </form>
+</div>
+
+<div id="actorDg" class="easyui-dialog" style="width:300px;height:200px;padding:10px 20px" closed="true" buttons="#actorDg-buttons">
+
+    <form id="actorDgForm" method="post">
+        <input type="hidden" name="userId" id="userActorHidden" />
+        <select id="actorSelect" name="actorId">
+            <option value="0">-请选择角色-</option>
+        </select>
+    </form>
+</div>
+<div id="actorDg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUserActor()" style="width:90px">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#actorDg').dialog('close')" style="width:90px">Cancel</a>
 </div>
 <div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
