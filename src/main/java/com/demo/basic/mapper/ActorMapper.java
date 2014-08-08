@@ -19,4 +19,6 @@ public interface ActorMapper{
     public void addActor(Actor actor);
 
     public void updateActor(Actor actor);
+
+    public void deleteActorPurviewByActorId(Long id);
 }

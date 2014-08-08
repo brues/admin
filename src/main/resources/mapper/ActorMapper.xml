@@ -20,4 +20,8 @@
         update admin_actor set actorName=#{actorName} where id=#{id}
     </update>
 
+    <delete id="deleteActorPurviewByActorId" parameterType="java.lang.Long">
+        delete from admin_actorPurview where actorId=#{id}
+    </delete>
+
 </mapper>

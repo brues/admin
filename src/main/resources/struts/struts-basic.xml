@@ -122,6 +122,19 @@
             <result name="userActorList">/WEB-INF/pages/basic/userActor/usersActorList.jsp</result>
         </action>
 
+
+
+
+
+
+
+        <action name="saveOrUpdateActorPurview" class="com.demo.basic.action.ActorPurviewAction" method="saveOrUpdateActorPurview">
+            <result name="saveOrUpdateActorPurview" type="json"></result>
+        </action>
+
+        <action name="deleteByActorId" class="com.demo.basic.action.ActorPurviewAction" method="deleteByActorId">
+            <result name="deleteByActorId" type="json"></result>
+        </action>
     </package>
 
 </struts>

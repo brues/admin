@@ -32,6 +32,7 @@ public class UserService {
 
     public void deleteUserById(Long id) {
         userMapper.deleteUserById(id);
+        userMapper.deleteUserActorByUserId(id);
     }
 
     public void saveOrUpdateUser(User user) {

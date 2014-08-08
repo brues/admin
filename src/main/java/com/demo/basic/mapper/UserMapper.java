@@ -21,4 +21,6 @@ public interface UserMapper {
     public void saveUser(User user);
 
     public void updateUser(User user);
+
+    public void deleteUserActorByUserId(Long id);
 }

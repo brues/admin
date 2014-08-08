@@ -4,4 +4,12 @@
 
 <mapper namespace="com.demo.basic.mapper.ActorPurviewMapper">
 
+    <insert id="add" parameterType="com.demo.basic.entity.ActorPurview">
+        insert into admin_actorPurview(actorId,purviewId) values(#{actorId},#{purviewId})
+    </insert>
+
+    <delete id="deleteByActorId" parameterType="java.lang.Long">
+        delete from admin_actorPurview where actorId=#{actorId}
+    </delete>
+
 </mapper>

@@ -25,4 +25,8 @@
         update admin_user
         set userName=#{userName}, trueName=#{trueName}, phone=#{phone}, email=#{email}, registerDate=#{registerDate}, comments=#{comments} where id=#{id}
     </update>
+
+    <delete id="deleteUserActorByUserId" parameterType="java.lang.Long">
+        delete from admin_userActor where userId=#{id}
+    </delete>
 </mapper>

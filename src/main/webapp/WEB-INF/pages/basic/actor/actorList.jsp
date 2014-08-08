@@ -111,7 +111,105 @@
             });
         }
 
+        function doPurview(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                $('#dlgs').dialog('open').dialog('setTitle','添加权限');
+            }
+        }
+
+        function saveActorPurview(){
+            var row = $('#dg').datagrid('getSelected');
+            var id=row.id;
+            deleteActorPurview(id);
+
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            var checks = zTree.getCheckedNodes(true);
+            alert(checks.length)
+            for(i=0;i<checks.length;i++){
+                saveActorPurviewss(id,checks[i].id);
+            }
+            $('#dlgs').dialog('close');
+
+        }
+
+        function saveActorPurviewss(actorId,purviewId){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/basic/saveOrUpdateActorPurview.action",
+                data:{actorId:actorId,purviewId:purviewId}
+            });
+        }
+
+        function deleteActorPurview(id){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/basic/deleteByActorId.action",
+                data:{actorId:id}
+            });
+        }
     </script>
+
+
+
+
+    <link rel="stylesheet" href="/common/ztree/css/demo.css" type="text/css">
+    <link rel="stylesheet" href="/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+
+
+    <SCRIPT type="text/javascript">
+        <!--
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+
+        var zNodes =[];
+
+        var code;
+
+        function setCheck() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                    py = "p",
+                    sy = "s",
+                    pn = "p",
+                    sn = "s",
+                    type = { "Y":py + sy, "N":pn + sn};
+            zTree.setting.check.chkboxType = type;
+            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+        }
+        function showCode(str) {
+            if (!code) code = $("#code");
+            code.empty();
+            code.append("<li>"+str+"</li>");
+        }
+
+        $(document).ready(function(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
+                dataType:"json",
+                success:function(data){
+                    var arr=data.purviewList;
+                    for(i=0;i<arr.length;i++){
+                        zNodes[zNodes.length]={id:arr[i].id, pId:arr[i].parentId, name:arr[i].purviewName,open:true};
+                    }
+                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                    setCheck();
+                    $("#py").bind("change", setCheck);
+                    $("#sy").bind("change", setCheck);
+                    $("#pn").bind("change", setCheck);
+                    $("#sn").bind("change", setCheck);
+                }
+            });
+        });
+        //-->
+    </SCRIPT>
 </head>
 <body>
 <h2>角色管理</h2>
@@ -133,10 +231,10 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newActor()">添加角色</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editActor()">编辑角色</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyActor()">删除角色</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doPurview()">分配权限</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px"
-     closed="true" buttons="#dlg-buttons">
+<div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">角色信息</div>
     <form id="fm" method="post" name="actor">
         <div class="fitem" style="display: none;">
@@ -153,7 +251,16 @@
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActor()" style="width:90px">Save</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
 </div>
-
+<div id="dlgs" class="easyui-dialog" style="width:400px;height:600px;padding:10px 20px" closed="true" buttons="#dlgs-buttons">
+    <div class="ftitle">权限列表</div>
+    <div class="zTreeDemoBackground left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</div>
+<div id="dlgs-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActorPurview()" style="width:90px">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgs').dialog('close')" style="width:90px">Cancel</a>
+</div>
 
 </body>
 </html>

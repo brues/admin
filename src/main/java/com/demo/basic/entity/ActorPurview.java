@@ -9,24 +9,22 @@ import com.demo.base.entity.BaseEntity;
  */
 public class ActorPurview extends BaseEntity {
 
-    private Integer actorId;//角色ID
-    private Integer purviewId;//权限ID
+    private Long actorId;//角色ID
+    private Long purviewId;//权限ID
 
-    public Integer getActorId() {
+    public Long getActorId() {
         return actorId;
     }
 
-    public void setActorId(Integer actorId) {
+    public void setActorId(Long actorId) {
         this.actorId = actorId;
     }
 
-
-    public Integer getPurviewId() {
+    public Long getPurviewId() {
         return purviewId;
     }
 
-    public void setPurviewId(Integer purviewId) {
+    public void setPurviewId(Long purviewId) {
         this.purviewId = purviewId;
     }
-
 }

@@ -22,6 +22,7 @@ public class ActorService {
 
     public void deleteActorById(Long id) {
         actorMapper.deleteActorById(id);
+        actorMapper.deleteActorPurviewByActorId(id);
     }
 
     public void saveOrUpdateActor(Actor actor) {
