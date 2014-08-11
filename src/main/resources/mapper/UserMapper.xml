@@ -16,17 +16,21 @@
         delete from admin_user where id=#{id}
     </delete>
 
-    <insert id="saveUser">
+    <insert id="saveUser" parameterType="com.demo.basic.entity.User">
         insert into admin_user (userName,password,trueName,phone,email,registerDate,comments)
-        values(#{userName},#{password},#{trueName},#{phone},#{email},#{registerDate},${comments})
+                     values(#{userName},#{password},#{trueName},#{phone},#{email},#{registerDate},#{comments})
     </insert>
 
-    <update id="updateUser">
+    <update id="updateUser" parameterType="com.demo.basic.entity.User">
         update admin_user
-        set userName=#{userName}, trueName=#{trueName}, phone=#{phone}, email=#{email}, registerDate=#{registerDate}, comments=#{comments} where id=#{id}
+        set userName=#{userName},password=#{password}, trueName=#{trueName}, phone=#{phone}, email=#{email}, registerDate=#{registerDate}, comments=#{comments} where id=#{id}
     </update>
 
     <delete id="deleteUserActorByUserId" parameterType="java.lang.Long">
         delete from admin_userActor where userId=#{id}
     </delete>
 </mapper>
+
+
+
+

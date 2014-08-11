@@ -38,12 +38,15 @@ public class LoginAction extends BaseAction {
             return "login";
         }else{
             session.setAttribute("admin_user",user);
-            List<Purview> purviewList = purviewService.findListByParentId(0L);
+            List<Purview> purviewList = purviewService.findByUserIdAndParentId(user.getId(),0l);
             for (int i = 0; i < purviewList.size(); i++) {
-                treeString+="<li data-options=\"state:\'closed\'\">";
-                treeString+="<span>"+purviewList.get(i).getPurviewName()+"</span>";
-                List<Purview> purviews = purviewService.findListByParentId(purviewList.get(i).getId());
+
+                List<Purview> purviews = purviewService.findByUserIdAndParentId(user.getId(),purviewList.get(i).getId());
                 if (purviews.size()>0){
+                    treeString+="<li data-options=\"state:\'closed\'\">";
+                    treeString+="<span>"+purviewList.get(i).getPurviewName()+"</span>";
+
+
                     treeString+="<ul>";
                     for (int j = 0; j < purviews.size(); j++) {
                         treeString+="<li>";
@@ -51,8 +54,11 @@ public class LoginAction extends BaseAction {
                         treeString+="</li>";
                     }
                     treeString+="</ul>";
+
+
+
+                    treeString+="</li>";
                 }
-                treeString+="</li>";
             }
             return "welcome";
         }

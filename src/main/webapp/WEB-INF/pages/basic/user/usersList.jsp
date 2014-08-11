@@ -202,6 +202,10 @@
             <label>用户名:</label>
             <input name="userName" class="easyui-textbox" required="true" >
         </div>
+        <div class="fitem" style="display: none;">
+            <label>密码:</label>
+            <input name="password" class="easyui-textbox" required="true" >
+        </div>
         <div class="fitem">
             <label>真实姓名:</label>
             <input name="trueName" class="easyui-textbox">
@@ -213,6 +217,10 @@
         <div class="fitem">
             <label>邮箱:</label>
             <input name="email" class="easyui-textbox" validType="email">
+        </div>
+        <div class="fitem" style="display: none;">
+            <label>注册日期:</label>
+            <input name="registerDate" class="easyui-textbox" validType="email">
         </div>
         <div class="fitem">
             <label>备注:</label>

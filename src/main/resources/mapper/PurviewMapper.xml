@@ -28,4 +28,15 @@
     <update id="update" parameterType="com.demo.basic.entity.Purview">
         update admin_purview set purviewName=#{purviewName},url=#{url} where id=#{id}
     </update>
+
+
+    <select id="findByUserIdAndParentId" parameterType="com.demo.basic.vo.UserPurviewVo" resultType="com.demo.basic.entity.Purview">
+        select *
+        from admin_purview c
+        where c.parentId=#{parentId} and c.id in (select b.purviewId
+        from admin_actorPurview b
+        where b.actorId=(select a.actorId
+        from admin_userActor a
+        where a.userId=#{userId}))
+    </select>
 </mapper>

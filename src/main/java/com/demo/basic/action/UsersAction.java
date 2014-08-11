@@ -23,6 +23,8 @@ public class UsersAction extends BaseAction {
     private String phone;
     private String email;
     private String comments;
+    private String password;
+    private String registerDate;
 
 
     @Autowired
@@ -46,30 +48,37 @@ public class UsersAction extends BaseAction {
 
     public String saveOrUpdateUser() throws Exception {
         User user = new User();
-        if(id!=null)
+        if(id!=null){
             user.setId(id);
+            user.setPassword(password);
+        }
         else
             user.setPassword(userName);
         if(!userName.equals(""))
             user.setUserName(userName);
         else
-            user.setUserName("");
+            user.setUserName("null");
         if(!trueName.equals(""))
             user.setTrueName(trueName);
         else
-            user.setTrueName("");
+            user.setTrueName("null");
         if(!phone.equals(""))
             user.setPhone(phone);
         else
-            user.setPhone("");
+            user.setPhone("null");
         if(!email.equals(""))
             user.setEmail(email);
         else
-            user.setEmail("");
+            user.setEmail("null");
         if(!comments.equals(""))
             user.setComments(comments);
         else
-            user.setComments("");
+            user.setComments("null");
+
+        if(!registerDate.equals(""))
+            user.setRegisterDate(registerDate);
+        else
+            user.setRegisterDate("null");
         userService.saveOrUpdateUser(user);
 
         return "saveOrUpdateUser";
@@ -133,4 +142,19 @@ public class UsersAction extends BaseAction {
         this.comments = comments;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
+    }
 }

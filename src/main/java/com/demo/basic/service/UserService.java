@@ -36,6 +36,7 @@ public class UserService {
     }
 
     public void saveOrUpdateUser(User user) {
+
         if (user.getId()==null||user.getId()==0){
             user.setRegisterDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
             userMapper.saveUser(user);

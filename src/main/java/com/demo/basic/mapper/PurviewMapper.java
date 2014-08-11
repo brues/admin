@@ -1,6 +1,7 @@
 package com.demo.basic.mapper;
 
 import com.demo.basic.entity.Purview;
+import com.demo.basic.vo.UserPurviewVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface PurviewMapper{
     public void add(Purview purview);
 
     public void update(Purview purview);
+
+    public List<Purview> findByUserIdAndParentId(UserPurviewVo userPurviewVo);
 }

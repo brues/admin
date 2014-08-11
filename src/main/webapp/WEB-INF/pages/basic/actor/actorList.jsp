@@ -122,15 +122,6 @@
             var row = $('#dg').datagrid('getSelected');
             var id=row.id;
             deleteActorPurview(id);
-
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-            var checks = zTree.getCheckedNodes(true);
-            alert(checks.length)
-            for(i=0;i<checks.length;i++){
-                saveActorPurviewss(id,checks[i].id);
-            }
-            $('#dlgs').dialog('close');
-
         }
 
         function saveActorPurviewss(actorId,purviewId){
@@ -143,7 +134,23 @@
         function deleteActorPurview(id){
             $.ajax({
                 url:"${pageContext.request.contextPath}/basic/deleteByActorId.action",
-                data:{actorId:id}
+                data:{actorId:id},
+                success:function(data){
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    var checks = zTree.getCheckedNodes(true);
+                    for(i=0;i<checks.length;i++){
+                        saveActorPurviewss(id,checks[i].id);
+                    }
+                    $('#dlgs').dialog('close');
+                },
+                error:function(){
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    var checks = zTree.getCheckedNodes(true);
+                    for(i=0;i<checks.length;i++){
+                        saveActorPurviewss(id,checks[i].id);
+                    }
+                    $('#dlgs').dialog('close');
+                }
             });
         }
     </script>
