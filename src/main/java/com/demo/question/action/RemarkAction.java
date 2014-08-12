@@ -11,4 +11,8 @@ public class RemarkAction extends BaseAction {
 
     @Autowired
     private RemarkService remarkService;
+
+    public String remarkList() throws Exception {
+        return "remarkList";
+    }
 }

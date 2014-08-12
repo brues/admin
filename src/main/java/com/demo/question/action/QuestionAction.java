@@ -11,4 +11,12 @@ public class QuestionAction extends BaseAction {
 
     @Autowired
     private QuestionService questionService;
+
+    public String questionList() throws Exception {
+        return "questionList";
+    }
+
+    public String searchList() throws Exception {
+        return "searchList";
+    }
 }

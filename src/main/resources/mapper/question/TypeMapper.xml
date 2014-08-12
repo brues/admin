@@ -4,5 +4,19 @@
 
 <mapper namespace="com.demo.question.mapper.TypeMapper">
 
+    <select id="findTypeList" resultType="com.demo.question.entity.Type">
+        select * from admin_type
+    </select>
 
+    <delete id="deleteTypeById" parameterType="java.lang.Long">
+        delete from admin_type where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.Type">
+        insert into admin_type(name) values(#{name})
+    </insert>
+
+    <update id="update" parameterType="com.demo.question.entity.Type">
+        update admin_type set name=#{name} where id=#{id}
+    </update>
 </mapper>

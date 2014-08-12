@@ -6,8 +6,22 @@
 <struts>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
 
+    <!-- 开发模式下使用,这样可以打印出更详细的错误信息 -->
+    <constant name="struts.devMode" value="true" />
 
-    <include file="struts/struts-login.xml"/>
-    <include file="struts/struts-basic.xml"/>
+    <!-- 国际化-->
+    <constant name="struts.custom.i18n.resources" value="admin"/>
+
+    <!-- 国际化 -->
+    <constant name="struts.i18n.reload" value="true"/>
+
+    <!-- 自动重新加载映射加载 -->
+    <constant name="struts.convention.classes.reload" value="true"/>
+
+    <!-- 当struts的配置文件修改后,系统是否自动重新加载该文件 -->
+    <constant name="struts.configuration.xml.reload" value="true"/>
+
+
+    <include file="struts/struts*.xml"></include>
 
 </struts>

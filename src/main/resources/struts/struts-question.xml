@@ -11,5 +11,55 @@
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
 
+
+        <action name="ansShapeList" class="com.demo.question.action.AnsShapeAction" method="ansShapeList">
+            <result name="ansShapeList">/WEB-INF/pages/question/ansShape/ansShapeList.jsp</result>
+        </action>
+
+
+
+
+        <action name="typeList" class="com.demo.question.action.TypeAction" method="typeList">
+            <result name="typeList">/WEB-INF/pages/question/type/typeList.jsp</result>
+        </action>
+
+        <action name="findTypeList" class="com.demo.question.action.TypeAction" method="findTypeList">
+            <result name="findTypeList" type="json"> <param name="map">json</param></result>
+        </action>
+
+        <action name="deleteTypeById" class="com.demo.question.action.TypeAction" method="deleteTypeById">
+            <result name="deleteTypeById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateType" class="com.demo.question.action.TypeAction" method="saveOrUpdateType">
+            <result name="saveOrUpdateType" type="json"></result>
+        </action>
+
+
+
+
+
+
+
+        <action name="remarkList" class="com.demo.question.action.RemarkAction" method="remarkList">
+            <result name="remarkList">/WEB-INF/pages/question/remark/remarkList.jsp</result>
+        </action>
+
+
+
+
+
+
+        <action name="questionList" class="com.demo.question.action.QuestionAction" method="questionList">
+            <result name="questionList">/WEB-INF/pages/question/question/questionList.jsp</result>
+        </action>
+
+        <action name="searchList" class="com.demo.question.action.QuestionAction" method="searchList">
+            <result name="searchList">/WEB-INF/pages/question/question/questionSearchList.jsp</result>
+        </action>
+
+
+
+
     </package>
 </struts>

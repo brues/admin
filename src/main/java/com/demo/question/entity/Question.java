@@ -5,6 +5,7 @@ import com.demo.base.entity.BaseEntity;
 /**
  * Created by guoyibin on 8/11/14.
  *
+ * 问题
  */
 public class Question extends BaseEntity {
 

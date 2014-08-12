@@ -4,13 +4,15 @@ import com.demo.base.entity.BaseEntity;
 
 /**
  * Created by guoyibin on 8/11/14.
+ *
+ * 问题备注
  */
 public class Remark extends BaseEntity {
 
-    private String content;
-    private Long questionId;
-    private String remarkPer;
-    private String remmarkTime;
+    private String content;//备注内容
+    private Long questionId;//问题id
+    private String remarkPer;//备注人
+    private String remmarkTime;//备注时间
 
     public String getContent() {
         return content;
