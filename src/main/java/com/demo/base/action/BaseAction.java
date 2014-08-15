@@ -14,43 +14,36 @@ import javax.servlet.http.HttpSession;
  *
  */
 public class BaseAction extends ActionSupport implements ServletRequestAware,ServletResponseAware {
-
+    public Long id;
 
     protected HttpServletRequest request;
     protected HttpSession session ;
     protected HttpServletResponse response ;
 
-    public void setServletRequest(HttpServletRequest request) {
-        this.request = request;
+    public BaseAction(){}
+
+
+    public void setServletRequest(HttpServletRequest req) {
+        this.request=req;
         this.session = this.request.getSession();
     }
-
-    public void setServletResponse(HttpServletResponse response) {
-        this.response = response;
+    public void setServletResponse(HttpServletResponse res) {
+        this.response=res;
     }
-
     public HttpServletRequest getRequest() {
         return request;
     }
-
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
-        this.session = this.request.getSession();
-    }
-
-    public HttpSession getSession() {
-        return session;
-    }
-
-    public void setSession(HttpSession session) {
-        this.session = this.request.getSession();
-    }
-
     public HttpServletResponse getResponse() {
         return response;
     }
 
-    public void setResponse(HttpServletResponse response) {
-        this.response = response;
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 }

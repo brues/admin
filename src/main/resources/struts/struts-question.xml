@@ -16,6 +16,22 @@
             <result name="ansShapeList">/WEB-INF/pages/question/ansShape/ansShapeList.jsp</result>
         </action>
 
+        <action name="findAnsShapeList" class="com.demo.question.action.AnsShapeAction" method="findAnsShapeList">
+            <result name="findAnsShapeList" type="json"><param name="map">json</param></result>
+        </action>
+
+        <action name="deleteAnsShapeById" class="com.demo.question.action.AnsShapeAction" method="deleteAnsShapeById">
+            <result name="deleteAnsShapeById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateAnsShape" class="com.demo.question.action.AnsShapeAction" method="saveOrUpdateAnsShape">
+            <result name="saveOrUpdateAnsShape" type="json"></result>
+        </action>
+
+
+
+
+
 
 
 
@@ -45,6 +61,18 @@
             <result name="remarkList">/WEB-INF/pages/question/remark/remarkList.jsp</result>
         </action>
 
+        <action name="findRemarkList" class="com.demo.question.action.RemarkAction" method="findRemarkList">
+            <result name="findRemarkList" type="json"><param name="map">json</param></result>
+        </action>
+
+        <action name="deleteRemarkById" class="com.demo.question.action.RemarkAction" method="deleteRemarkById">
+            <result name="deleteRemarkById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateRemark" class="com.demo.question.action.RemarkAction" method="saveOrUpdateRemark">
+            <result name="saveOrUpdateRemark" type="json"></result>
+        </action>
+
 
 
 
@@ -56,6 +84,26 @@
 
         <action name="searchList" class="com.demo.question.action.QuestionAction" method="searchList">
             <result name="searchList">/WEB-INF/pages/question/question/questionSearchList.jsp</result>
+        </action>
+
+        <action name="findQuestionList" class="com.demo.question.action.QuestionAction" method="findQuestionList">
+            <result name="findQuestionList" type="json"><param name="map">json</param></result>
+        </action>
+
+        <action name="searchQuestionList" class="com.demo.question.action.QuestionAction" method="searchQuestionList">
+            <result name="searchQuestionList" type="json"><param name="map">json</param></result>
+        </action>
+
+        <action name="searchResultList" class="com.demo.question.action.QuestionAction" method="searchResultList">
+            <result name="searchResultList" type="json"><param name="map">json</param></result>
+        </action>
+
+        <action name="deleteQuestionById" class="com.demo.question.action.QuestionAction" method="deleteQuestionById">
+            <result name="deleteQuestionById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateQuestion" class="com.demo.question.action.QuestionAction" method="saveOrUpdateQuestion">
+            <result name="saveOrUpdateQuestion" type="json"></result>
         </action>
 
 

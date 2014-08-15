@@ -17,7 +17,7 @@ public class Question extends BaseEntity {
 
     private String clientPhone;//客户电话
 
-    private String askTIme;//提问时间
+    private String askTime;//提问时间
 
     private String answerTime;//回复时间
 
@@ -92,12 +92,12 @@ public class Question extends BaseEntity {
         this.clientPhone = clientPhone;
     }
 
-    public String getAskTIme() {
-        return askTIme;
+    public String getAskTime() {
+        return askTime;
     }
 
-    public void setAskTIme(String askTIme) {
-        this.askTIme = askTIme;
+    public void setAskTime(String askTime) {
+        this.askTime = askTime;
     }
 
     public String getAnswerTime() {
@@ -258,5 +258,35 @@ public class Question extends BaseEntity {
 
     public void setDqsfsy(String dqsfsy) {
         this.dqsfsy = dqsfsy;
+    }
+
+
+
+    private String typeName;
+    private String shapeName;
+    private String shiyongName;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getShapeName() {
+        return shapeName;
+    }
+
+    public void setShapeName(String shapeName) {
+        this.shapeName = shapeName;
+    }
+
+    public String getShiyongName() {
+        return shiyongName;
+    }
+
+    public void setShiyongName(String shiyongName) {
+        this.shiyongName = shiyongName;
     }
 }

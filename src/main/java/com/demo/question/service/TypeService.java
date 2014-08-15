@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by guoyibin on 8/11/14.
+ *
  */
 @Service
 public class TypeService {

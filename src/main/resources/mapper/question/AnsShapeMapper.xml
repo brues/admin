@@ -4,5 +4,20 @@
 
 <mapper namespace="com.demo.question.mapper.AnsShapeMapper">
 
+    <select id="findAnsShapeList" resultType="com.demo.question.entity.AnsShape">
+        select * from admin_ansShape
+    </select>
 
+    <delete id="deleteAnsShapeById" parameterType="java.lang.Long">
+        delete from admin_ansShape where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.AnsShape">
+        insert into admin_ansShape(shape) values(#{shape})
+    </insert>
+
+
+    <update id="update" parameterType="com.demo.question.entity.AnsShape">
+        update admin_ansShape set shape=#{shape} where id=#{id}
+    </update>
 </mapper>

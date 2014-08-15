@@ -11,7 +11,7 @@ public class Remark extends BaseEntity {
 
     private String content;//备注内容
     private Long questionId;//问题id
-    private String remarkPer;//备注人
+    private Long remarkPer;//备注人
     private String remmarkTime;//备注时间
 
     public String getContent() {
@@ -30,19 +30,19 @@ public class Remark extends BaseEntity {
         this.questionId = questionId;
     }
 
-    public String getRemarkPer() {
-        return remarkPer;
-    }
-
-    public void setRemarkPer(String remarkPer) {
-        this.remarkPer = remarkPer;
-    }
-
     public String getRemmarkTime() {
         return remmarkTime;
     }
 
     public void setRemmarkTime(String remmarkTime) {
         this.remmarkTime = remmarkTime;
+    }
+
+    public Long getRemarkPer() {
+        return remarkPer;
+    }
+
+    public void setRemarkPer(Long remarkPer) {
+        this.remarkPer = remarkPer;
     }
 }

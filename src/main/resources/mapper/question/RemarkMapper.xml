@@ -4,5 +4,19 @@
 
 <mapper namespace="com.demo.question.mapper.RemarkMapper">
 
+    <select id="findRemarkList" parameterType="java.lang.Long" resultType="com.demo.question.entity.Remark">
+        select * from admin_remark where questionId=#{questionId}
+    </select>
 
+    <delete id="deleteRemarkById" parameterType="java.lang.Long">
+        delete from admin_remark where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.demo.question.entity.Remark">
+        update admin_remark set content=#{content} where id=#{id}
+    </update>
+
+    <insert id="add" parameterType="com.demo.question.entity.Remark">
+        insert into admin_remark(content, questionId, remarkPer, remmarkTime) values(#{content},#{questionId},#{remarkPer},#{remmarkTime})
+    </insert>
 </mapper>

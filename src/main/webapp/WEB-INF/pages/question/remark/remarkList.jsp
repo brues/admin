@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <title>问题备注</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
@@ -45,20 +45,21 @@
 
     <script type="text/javascript">
         var url;
-        function newActor(){
-            $('#dlg').dialog('open').dialog('setTitle','添加角色');
+        function newRemark(){
+            $('#dlg').dialog('open').dialog('setTitle','添加问题备注');
             $('#fm').form('clear');
-            url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
+            $("#questionIdDlg").val($("#questionId").val());
+            url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action';
         }
-        function editActor(){
+        function editRemark(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','Edit Actor');
+                $('#dlg').dialog('open').dialog('setTitle','Edit Remark');
                 $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
+                url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action';
             }
         }
-        function saveActor(){
+        function saveRemark(){
             $('#fm').form('submit',{
                 url: url,
                 onSubmit: function(){
@@ -70,14 +71,14 @@
                 }
             });
         }
-        function destroyActor(){
+        function destroyRemark(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $.messager.confirm('提示框','确定删除此记录吗?',function(r){
                     if (r){
 
                         $.ajax({
-                            url:"${pageContext.request.contextPath}/basic/deleteActorById.action",
+                            url:"${pageContext.request.contextPath}/que/deleteRemarkById.action",
                             data:{id:row.id},
                             success:function(data){
                                 dataLoads();
@@ -100,7 +101,8 @@
 
         function dataLoads(){
             $.ajax({
-                url:"${pageContext.request.contextPath}/basic/findActorList.action",
+                url:"${pageContext.request.contextPath}/que/findRemarkList.action",
+                data:{questionId:$("#questionId").val()},
                 dataType:"json",
                 success:function(data){
                     $('#dg').datagrid({
@@ -110,124 +112,22 @@
                 }
             });
         }
-
-        function doPurview(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlgs').dialog('open').dialog('setTitle','添加权限');
-            }
-        }
-
-        function saveActorPurview(){
-            var row = $('#dg').datagrid('getSelected');
-            var id=row.id;
-            deleteActorPurview(id);
-        }
-
-        function saveActorPurviewss(actorId,purviewId){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/saveOrUpdateActorPurview.action",
-                data:{actorId:actorId,purviewId:purviewId}
-            });
-        }
-
-        function deleteActorPurview(id){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/deleteByActorId.action",
-                data:{actorId:id},
-                success:function(data){
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    var checks = zTree.getCheckedNodes(true);
-                    for(i=0;i<checks.length;i++){
-                        saveActorPurviewss(id,checks[i].id);
-                    }
-                    $('#dlgs').dialog('close');
-                },
-                error:function(){
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    var checks = zTree.getCheckedNodes(true);
-                    for(i=0;i<checks.length;i++){
-                        saveActorPurviewss(id,checks[i].id);
-                    }
-                    $('#dlgs').dialog('close');
-                }
-            });
-        }
     </script>
 
-
-
-
-    <link rel="stylesheet" href="/common/ztree/css/demo.css" type="text/css">
-    <link rel="stylesheet" href="/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.core-3.5.js"></script>
-    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
-
-
-    <SCRIPT type="text/javascript">
-        <!--
-        var setting = {
-            check: {
-                enable: true
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            }
-        };
-
-        var zNodes =[];
-
-        var code;
-
-        function setCheck() {
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-                    py = "p",
-                    sy = "s",
-                    pn = "p",
-                    sn = "s",
-                    type = { "Y":py + sy, "N":pn + sn};
-            zTree.setting.check.chkboxType = type;
-            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
-        }
-        function showCode(str) {
-            if (!code) code = $("#code");
-            code.empty();
-            code.append("<li>"+str+"</li>");
-        }
-
-        $(document).ready(function(){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
-                dataType:"json",
-                success:function(data){
-                    var arr=data.purviewList;
-                    for(i=0;i<arr.length;i++){
-                        zNodes[zNodes.length]={id:arr[i].id, pId:arr[i].parentId, name:arr[i].purviewName,open:true};
-                    }
-                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                    setCheck();
-                    $("#py").bind("change", setCheck);
-                    $("#sy").bind("change", setCheck);
-                    $("#pn").bind("change", setCheck);
-                    $("#sn").bind("change", setCheck);
-                }
-            });
-        });
-        //-->
-    </SCRIPT>
 </head>
 <body>
-<h2>角色管理</h2>
+<input type="hidden" id="questionId" value="${questionId}" />
+<h2>问题备注管理</h2>
 <p></p>
 
-<table id="dg" title="角色列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
+<table id="dg" title="问题备注列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="id" width="50" align="center">角色ID</th>
-        <th field="actorName" width="50" align="center">角色名称</th>
+        <th field="content" width="50" align="center">问题备注</th>
+        <%--<th field="questionId" width="50" align="center">问题id</th>--%>
+        <th field="remarkPer" width="50" align="center">备注人</th>
+        <th field="remmarkTime" width="50" align="center">备注时间</th>
     </tr>
     </thead>
 </table>
@@ -235,39 +135,40 @@
      data-options="total:2000,pageSize:10">
 </div>--%>
 <div id="toolbar">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newActor()">添加角色</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editActor()">编辑角色</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyActor()">删除角色</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doPurview()">分配权限</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newRemark()">添加问题备注</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRemark()">编辑问题备注</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyRemark()">删除问题备注</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="history.go(-1)">返回</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
-    <div class="ftitle">角色信息</div>
-    <form id="fm" method="post" name="actor">
+    <div class="ftitle">问题备注信息</div>
+    <form id="fm" method="post" name="remark">
         <div class="fitem" style="display: none;">
-            <label>角色ID:</label>
+            <label>id:</label>
             <input name="id" class="easyui-textbox" required="true" >
         </div>
         <div class="fitem">
-            <label>角色名称:</label>
-            <input name="actorName" class="easyui-textbox">
+            <label>问题备注:</label>
+            <input name="content" class="easyui-textbox" required="true" >
+        </div>
+        <div class="fitem" style="display: none;">
+            <label>问题ID:</label>
+            <input id="questionIdDlg" name="questionId" class="easyui-textbox">
+        </div>
+        <div class="fitem" style="display: none;">
+            <label>备注人:</label>
+            <input name="remarkPer" class="easyui-textbox">
+        </div>
+        <div class="fitem" style="display: none;">
+            <label>备注时间:</label>
+            <input name="remmarkTime" class="easyui-textbox">
         </div>
     </form>
 </div>
 <div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActor()" style="width:90px">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRemark()" style="width:90px">Save</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
 </div>
-<div id="dlgs" class="easyui-dialog" style="width:400px;height:600px;padding:10px 20px" closed="true" buttons="#dlgs-buttons">
-    <div class="ftitle">权限列表</div>
-    <div class="zTreeDemoBackground left">
-        <ul id="treeDemo" class="ztree"></ul>
-    </div>
-</div>
-<div id="dlgs-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActorPurview()" style="width:90px">Save</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgs').dialog('close')" style="width:90px">Cancel</a>
-</div>
-
 </body>
 </html>

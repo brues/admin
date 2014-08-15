@@ -4,5 +4,45 @@
 
 <mapper namespace="com.demo.question.mapper.QuestionMapper">
 
+    <select id="findQuestionList" resultType="com.demo.question.entity.Question">
+        select * from admin_question
+    </select>
+
+    <select id="searchQuestionList" resultType="com.demo.question.entity.Question">
+        select a.*,(select name from admin_type b where b.id=a.typeId) typeName,
+        (select shape from admin_ansShape c where c.id=a.ansShapeId) shapeName from admin_question a
+    </select>
+
+    <delete id="deleteQuestionById" parameterType="java.lang.Long">
+        delete from admin_question where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.Question">
+        insert into admin_question(clientName,caseNum,clientAddress,clientPhone,askTime,answerTime,caseTitle,pcharge,chargePhone,
+                ansShapeId,typeId,question,answer,legalBasis,revComment,answerPeo,addressee,sender,senderDept,addresseeFax,senderFax,
+                zxzjfhr,fhr,hhrshr,dqsfsy)
+                values(#{clientName},#{caseNum},#{clientAddress},#{clientPhone},#{askTime},#{answerTime},#{caseTitle},#{pcharge},#{chargePhone},
+                #{ansShapeId},#{typeId},#{question},#{answer},#{legalBasis},#{revComment},#{answerPeo},#{addressee},#{sender},#{senderDept},
+                #{addresseeFax},#{senderFax},#{zxzjfhr},#{fhr},#{hhrshr},#{dqsfsy})
+    </insert>
+
+    <update id="update" parameterType="com.demo.question.entity.Question">
+        update admin_question set clientName=#{clientName},caseNum=#{caseNum},clientAddress=#{clientAddress},clientPhone=#{clientPhone},
+                askTime=#{askTime},answerTime=#{answerTime},caseTitle=#{caseTitle},pcharge=#{pcharge},chargePhone=#{chargePhone},
+                ansShapeId=#{ansShapeId},typeId=#{typeId},question=#{question},answer=#{answer},legalBasis=#{legalBasis},revComment=#{revComment},
+                answerPeo=#{answerPeo},addressee=#{addressee},sender=#{sender},senderDept=#{senderDept},addresseeFax=#{addresseeFax},
+                senderFax=#{senderFax},zxzjfhr=#{zxzjfhr},fhr=#{fhr},hhrshr=#{hhrshr},dqsfsy=#{dqsfsy} where id=#{id}
+    </update>
+
+    <delete id="deleteRemarkByQuestionId" parameterType="java.lang.Long">
+        delete from admin_remark where questionId=#{questionId}
+    </delete>
+
+    <select id="searchResultList" parameterType="java.lang.String" resultType="com.demo.question.entity.Question">
+        select a.*,(select name from admin_type b where b.id=a.typeId) typeName,
+        (select shape from admin_ansShape c where c.id=a.ansShapeId) shapeName from admin_question a
+        where a.caseTitle like CONCAT('%',#{key},'%')
+    </select>
+
 
 </mapper>
