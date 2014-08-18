@@ -140,7 +140,7 @@
     <form id="fm" method="post" name="ansShape">
         <div class="fitem" style="display: none;">
             <label>回复形式ID:</label>
-            <input name="id" class="easyui-textbox" required="true" >
+            <input name="id" class="easyui-textbox" >
         </div>
         <div class="fitem">
             <label>回复形式类型:</label>

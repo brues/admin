@@ -246,7 +246,7 @@
     <form id="fm" method="post" name="actor">
         <div class="fitem" style="display: none;">
             <label>角色ID:</label>
-            <input name="id" class="easyui-textbox" required="true" >
+            <input name="id" class="easyui-textbox"  >
         </div>
         <div class="fitem">
             <label>角色名称:</label>

@@ -167,7 +167,7 @@
     <form id="fm" method="post" name="purview">
         <div class="fitem" style="display: none;">
             <label>权限Id:</label>
-            <input name="id" class="easyui-textbox" required="true" >
+            <input name="id" class="easyui-textbox"  >
         </div>
         <div class="fitem">
             <label>权限名称:</label>

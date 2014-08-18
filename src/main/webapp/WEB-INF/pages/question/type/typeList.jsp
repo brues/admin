@@ -140,7 +140,7 @@
     <form id="fm" method="post" name="type">
         <div class="fitem" style="display: none;">
             <label>来源ID:</label>
-            <input name="id" class="easyui-textbox" required="true" >
+            <input name="id" class="easyui-textbox">
         </div>
         <div class="fitem">
             <label>来源类型:</label>

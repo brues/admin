@@ -146,7 +146,7 @@
     <form id="fm" method="post" name="remark">
         <div class="fitem" style="display: none;">
             <label>id:</label>
-            <input name="id" class="easyui-textbox" required="true" >
+            <input name="id" class="easyui-textbox" >
         </div>
         <div class="fitem">
             <label>问题备注:</label>

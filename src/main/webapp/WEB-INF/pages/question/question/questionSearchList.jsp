@@ -160,7 +160,7 @@
     <form id="fm" method="post" name="question">
         <div class="fitem" style="display: none;">
             <label>问题ID:</label>
-            <input name="id" class="easyui-textbox" required="true" />
+            <input name="id" class="easyui-textbox"  />
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
             <label >案例编号:</label>
