@@ -28,7 +28,7 @@ public class LoginAction extends BaseAction {
     @Autowired
     private PurviewService purviewService;
 
-    public String login() throws Exception {
+    public String login() {
         return "login";
     }
 

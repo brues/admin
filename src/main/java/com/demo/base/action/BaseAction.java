@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  *
  */
 public class BaseAction extends ActionSupport implements ServletRequestAware,ServletResponseAware {
-    public Long id;
+    protected Long id;
 
     protected HttpServletRequest request;
     protected HttpSession session ;
