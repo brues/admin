@@ -43,8 +43,9 @@ public class RemarkAction extends BaseAction {
     }
 
     public String saveOrUpdateRemark() throws Exception {
-        if (remarkPer==null)
+        if (remarkPer==null){
             remarkPer = ((User)session.getAttribute("admin_user")).getId();
+        }
         remarkService.saveOrUpdateRemark(id,content,questionId,remarkPer,remmarkTime);
         return "saveOrUpdateRemark";
     }
