@@ -53,7 +53,7 @@
         function editActor(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','Edit Actor');
+                $('#dlg').dialog('open').dialog('setTitle','编辑角色');
                 $('#fm').form('load',row);
                 url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
             }
@@ -255,8 +255,8 @@
     </form>
 </div>
 <div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActor()" style="width:90px">Save</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActor()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 </div>
 <div id="dlgs" class="easyui-dialog" style="width:400px;height:600px;padding:10px 20px" closed="true" buttons="#dlgs-buttons">
     <div class="ftitle">权限列表</div>
@@ -265,8 +265,8 @@
     </div>
 </div>
 <div id="dlgs-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActorPurview()" style="width:90px">Save</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgs').dialog('close')" style="width:90px">Cancel</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveActorPurview()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgs').dialog('close')" style="width:90px">取消</a>
 </div>
 
 </body>

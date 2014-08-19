@@ -59,7 +59,7 @@
         </ul>
     </div>
     <div id="main-tabs" class="easyui-tabs" data-options="region:'center'" style="width:100%;">
-        <div title="Welcome" style="padding:10px;width:100%;">
+        <div title="欢迎" style="padding:10px;width:100%;">
             <p style="font-size:14px">欢迎进入中翰税务内部问答数据查询系统</p>
         </div>
     </div>

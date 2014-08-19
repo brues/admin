@@ -47,7 +47,7 @@
         function editQuestion(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','Edit Question');
+                $('#dlg').dialog('open').dialog('setTitle','查看问题');
                 $('#fm').form('load',row);
             }
         }
@@ -245,7 +245,7 @@
 </div>
 <div id="dlg-buttons">
     <%--<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveQuestion()" style="width:90px">Save</a>--%>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">关闭</a>
 </div>
 </body>
 </html>
