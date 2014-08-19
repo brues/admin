@@ -48,15 +48,15 @@
         function newRemark(){
             $('#dlg').dialog('open').dialog('setTitle','添加问题备注');
             $('#fm').form('clear');
-            $("#questionIdDlg").val($("#questionId").val());
-            url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action';
+            $("#questionId").val($("#questionIdDlg").val());
+            url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action?questionId='+$("#questionIdDlg").val();
         }
         function editRemark(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $('#dlg').dialog('open').dialog('setTitle','Edit Remark');
                 $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action';
+                url = '${pageContext.request.contextPath}/que/saveOrUpdateRemark.action?questionId='+$("#questionIdDlg").val();
             }
         }
         function saveRemark(){
@@ -102,7 +102,7 @@
         function dataLoads(){
             $.ajax({
                 url:"${pageContext.request.contextPath}/que/findRemarkList.action",
-                data:{questionId:$("#questionId").val()},
+                data:{questionId:$("#questionIdDlg").val()},
                 dataType:"json",
                 success:function(data){
                     $('#dg').datagrid({
@@ -116,7 +116,7 @@
 
 </head>
 <body>
-<input type="hidden" id="questionId" value="${questionId}" />
+<input type="hidden" id="questionIdDlg" value="${questionId}" />
 <h2>问题备注管理</h2>
 <p></p>
 
@@ -143,7 +143,7 @@
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">问题备注信息</div>
-    <form id="fm" method="post" name="remark">
+    <form id="fm" method="post">
         <div class="fitem" style="display: none;">
             <label>id:</label>
             <input name="id" class="easyui-textbox" >
@@ -152,10 +152,10 @@
             <label>问题备注:</label>
             <input name="content" class="easyui-textbox" required="true" >
         </div>
-        <div class="fitem" style="display: none;">
+       <%-- <div class="fitem" style="display: none;">
             <label>问题ID:</label>
-            <input id="questionIdDlg" name="questionId" class="easyui-textbox">
-        </div>
+            <input name="questionId"  id="questionId" class="easyui-textbox" >
+        </div>--%>
         <div class="fitem" style="display: none;">
             <label>备注人:</label>
             <input name="remarkPer" class="easyui-textbox">

@@ -36,7 +36,10 @@ public class RemarkService {
             remark.setRemarkPer(remarkPer);
             remarkMapper.add(remark);
         }else{
+            remark.setRemmarkTime(remmarkTime);
             remark.setId(id);
+            remark.setQuestionId(questionId);
+            remark.setRemarkPer(remarkPer);
             remarkMapper.update(remark);
         }
     }
