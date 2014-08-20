@@ -1,16 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <html>
-<head>
+    <head>
         <title>中翰税务</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
@@ -37,8 +34,7 @@
         </script>
     </head>
     <body style="height:100%;width:100%;overflow:hidden;border:none;visibility:visible;padding-left: 100px;" >
-        <div class="easyui-window"
-             style="width:500px;height:250px;background:#fafafa;overflow:hidden;"
+        <div class="easyui-window" style="width:500px;height:250px;background:#fafafa;overflow:hidden;"
              title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中翰顾问问题搜索系统"
@@ -50,11 +46,11 @@
                         <table cellpadding="0" cellspacing="3">
                             <tr>
                                 <td>登录帐号</td>
-                                <td><input name="userName"  /></td>
+                                <td><input name="userName" required="true" class="easyui-textbox" /></td>
                             </tr>
                             <tr>
                                 <td>登录密码</td>
-                                <td><input type="password" name="password"  /></td>
+                                <td><input type="password" name="password" required="true" class="easyui-textbox" /></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
