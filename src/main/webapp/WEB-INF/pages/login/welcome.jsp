@@ -56,10 +56,10 @@
             <div data-options="region:'north',split:true" title=""  style="width:100%;height:5%;"></div>
             <div data-options="region:'south',split:true" title=""  style="width:100%;height:5%;"></div>
             <%--<div data-options="region:'east',split:true" title="最近浏览" style="width:13%;"></div>--%>
-            <div id="divtreecaidian" data-options="region:'west',split:true" title="菜单" style="width:13%;">
-                <ul class="easyui-tree">
+            <div id="divtreecaidian" data-options="region:'west'" title="菜单" style="width:13%;">
+                <div class="easyui-accordion" data-options="fit:true,border:false">
                     <s:property value="treeString" escape="false"/>
-                </ul>
+                </div>
             </div>
             <div data-options="region:'center'" >
                 <div id="main-tabs"  class="easyui-tabs" data-options="fit:true,border:false,plain:true">

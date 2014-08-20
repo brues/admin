@@ -33,31 +33,30 @@ public class LoginAction extends BaseAction {
     }
 
     public String welcome() throws Exception {
+        System.out.println("1");
+        System.out.println(userName);
+        System.out.println("2");
+        System.out.println(password);
+        System.out.println("3");
         User user = userService.findByUserNameAndPassword(userName,password);
         if (user == null){
             return "login";
         }else{
             session.setAttribute("admin_user",user);
+            treeString="";
             List<Purview> purviewList = purviewService.findByUserIdAndParentId(user.getId(),0l);
             for (int i = 0; i < purviewList.size(); i++) {
-
                 List<Purview> purviews = purviewService.findByUserIdAndParentId(user.getId(),purviewList.get(i).getId());
                 if (purviews.size()>0){
-                    treeString+="<li data-options=\"state:\'closed\'\">";
-                    treeString+="<span>"+purviewList.get(i).getPurviewName()+"</span>";
+                    treeString+="<div title=\""+purviewList.get(i).getPurviewName()+"\"  style=\"padding:10px;\">";
 
-
-                    treeString+="<ul>";
                     for (int j = 0; j < purviews.size(); j++) {
-                        treeString+="<li>";
-                        treeString+="<span><a href='javascript:addPanel("+purviews.get(j).getId()+")'>"+purviews.get(j).getPurviewName()+"</a></span>";
-                        treeString+="</li>";
+                        treeString+="<p>";
+                        treeString+="<a href='javascript:addPanel("+purviews.get(j).getId()+")'>"+purviews.get(j).getPurviewName()+"</a>";
+                        treeString+="</p>";
                     }
-                    treeString+="</ul>";
 
-
-
-                    treeString+="</li>";
+                    treeString+="</div>";
                 }
             }
             return "welcome";

@@ -46,11 +46,11 @@
                         <table cellpadding="0" cellspacing="3">
                             <tr>
                                 <td>登录帐号</td>
-                                <td><input name="userName" required="true" class="easyui-textbox" /></td>
+                                <td><input name="userName"  /></td>
                             </tr>
                             <tr>
                                 <td>登录密码</td>
-                                <td><input type="password" name="password" required="true" class="easyui-textbox" /></td>
+                                <td><input type="password" name="password"  /></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
