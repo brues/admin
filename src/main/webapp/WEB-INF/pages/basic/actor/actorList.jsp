@@ -9,216 +9,216 @@
 %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/color.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
+<meta charset="UTF-8">
+<title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/color.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
 
-    <style type="text/css">
-        #fm{
-            margin:0;
-            padding:10px 30px;
-        }
-        .ftitle{
-            font-size:14px;
-            font-weight:bold;
-            padding:5px 0;
-            margin-bottom:10px;
-            border-bottom:1px solid #ccc;
-        }
-        .fitem{
-            margin-bottom:5px;
-        }
-        .fitem label{
-            display:inline-block;
-            width:80px;
-        }
-        .fitem input{
-            width:160px;
-        }
-    </style>
+<style type="text/css">
+    #fm{
+        margin:0;
+        padding:10px 30px;
+    }
+    .ftitle{
+        font-size:14px;
+        font-weight:bold;
+        padding:5px 0;
+        margin-bottom:10px;
+        border-bottom:1px solid #ccc;
+    }
+    .fitem{
+        margin-bottom:5px;
+    }
+    .fitem label{
+        display:inline-block;
+        width:80px;
+    }
+    .fitem input{
+        width:160px;
+    }
+</style>
 
-    <script type="text/javascript">
-        var url;
-        function newActor(){
-            $('#dlg').dialog('open').dialog('setTitle','添加角色');
-            $('#fm').form('clear');
+<script type="text/javascript">
+    var url;
+    function newActor(){
+        $('#dlg').dialog('open').dialog('setTitle','添加角色');
+        $('#fm').form('clear');
+        url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
+    }
+    function editActor(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $('#dlg').dialog('open').dialog('setTitle','编辑角色');
+            $('#fm').form('load',row);
             url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
         }
-        function editActor(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlg').dialog('open').dialog('setTitle','编辑角色');
-                $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/basic/saveOrUpdateActor.action';
-            }
-        }
-        function saveActor(){
-            $('#fm').form('submit',{
-                url: url,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    $('#dlg').dialog('close');
-                    dataLoads();
-                }
-            });
-        }
-        function destroyActor(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('提示框','确定删除此记录吗?',function(r){
-                    if (r){
-
-                        $.ajax({
-                            url:"${pageContext.request.contextPath}/basic/deleteActorById.action",
-                            data:{id:row.id},
-                            success:function(data){
-                                dataLoads();
-                            },
-                            error:function(){
-                                dataLoads();
-                            }
-                        });
-                    }
-                });
-            }
-        }
-    </script>
-
-
-    <script type="text/javascript">
-        $(function(){
-            dataLoads();
-        });
-
-        function dataLoads(){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/findActorList.action",
-                dataType:"json",
-                success:function(data){
-                    $('#dg').datagrid({
-                        data:data.map
-
-                    })
-                }
-            });
-        }
-
-        function doPurview(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlgs').dialog('open').dialog('setTitle','添加权限');
-            }
-        }
-
-        function saveActorPurview(){
-            var row = $('#dg').datagrid('getSelected');
-            var id=row.id;
-            deleteActorPurview(id);
-        }
-
-        function saveActorPurviewss(actorId,purviewId){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/saveOrUpdateActorPurview.action",
-                data:{actorId:actorId,purviewId:purviewId}
-            });
-        }
-
-        function deleteActorPurview(id){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/deleteByActorId.action",
-                data:{actorId:id},
-                success:function(data){
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    var checks = zTree.getCheckedNodes(true);
-                    for(i=0;i<checks.length;i++){
-                        saveActorPurviewss(id,checks[i].id);
-                    }
-                    $('#dlgs').dialog('close');
-                },
-                error:function(){
-                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                    var checks = zTree.getCheckedNodes(true);
-                    for(i=0;i<checks.length;i++){
-                        saveActorPurviewss(id,checks[i].id);
-                    }
-                    $('#dlgs').dialog('close');
-                }
-            });
-        }
-    </script>
-
-
-
-
-    <link rel="stylesheet" href="/common/ztree/css/demo.css" type="text/css">
-    <link rel="stylesheet" href="/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.core-3.5.js"></script>
-    <script type="text/javascript" src="/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
-
-
-    <SCRIPT type="text/javascript">
-        <!--
-        var setting = {
-            check: {
-                enable: true
+    }
+    function saveActor(){
+        $('#fm').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return $(this).form('validate');
             },
-            data: {
-                simpleData: {
-                    enable: true
-                }
+            success: function(result){
+                $('#dlg').dialog('close');
+                dataLoads();
             }
-        };
+        });
+    }
+    function destroyActor(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $.messager.confirm('提示框','确定删除此记录吗?',function(r){
+                if (r){
 
-        var zNodes =[];
-
-        var code;
-
-        function setCheck() {
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-                    py = "p",
-                    sy = "s",
-                    pn = "p",
-                    sn = "s",
-                    type = { "Y":py + sy, "N":pn + sn};
-            zTree.setting.check.chkboxType = type;
-            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
-        }
-        function showCode(str) {
-            if (!code) code = $("#code");
-            code.empty();
-            code.append("<li>"+str+"</li>");
-        }
-
-        $(document).ready(function(){
-            $.ajax({
-                url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
-                dataType:"json",
-                success:function(data){
-                    var arr=data.purviewList;
-                    for(i=0;i<arr.length;i++){
-                        zNodes[zNodes.length]={id:arr[i].id, pId:arr[i].parentId, name:arr[i].purviewName,open:true};
-                    }
-                    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                    setCheck();
-                    $("#py").bind("change", setCheck);
-                    $("#sy").bind("change", setCheck);
-                    $("#pn").bind("change", setCheck);
-                    $("#sn").bind("change", setCheck);
+                    $.ajax({
+                        url:"${pageContext.request.contextPath}/basic/deleteActorById.action",
+                        data:{id:row.id},
+                        success:function(data){
+                            dataLoads();
+                        },
+                        error:function(){
+                            dataLoads();
+                        }
+                    });
                 }
             });
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(function(){
+        dataLoads();
+    });
+
+    function dataLoads(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/basic/findActorList.action",
+            dataType:"json",
+            success:function(data){
+                $('#dg').datagrid({
+                    data:data.map
+
+                })
+            }
         });
-        //-->
-    </SCRIPT>
+    }
+
+    function doPurview(){
+        var row = $('#dg').datagrid('getSelected');
+        if (row){
+            $('#dlgs').dialog('open').dialog('setTitle','添加权限');
+        }
+    }
+
+    function saveActorPurview(){
+        var row = $('#dg').datagrid('getSelected');
+        var id=row.id;
+        deleteActorPurview(id);
+    }
+
+    function saveActorPurviewss(actorId,purviewId){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/basic/saveOrUpdateActorPurview.action",
+            data:{actorId:actorId,purviewId:purviewId}
+        });
+    }
+
+    function deleteActorPurview(id){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/basic/deleteByActorId.action",
+            data:{actorId:id},
+            success:function(data){
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                var checks = zTree.getCheckedNodes(true);
+                for(i=0;i<checks.length;i++){
+                    saveActorPurviewss(id,checks[i].id);
+                }
+                $('#dlgs').dialog('close');
+            },
+            error:function(){
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                var checks = zTree.getCheckedNodes(true);
+                for(i=0;i<checks.length;i++){
+                    saveActorPurviewss(id,checks[i].id);
+                }
+                $('#dlgs').dialog('close');
+            }
+        });
+    }
+</script>
+
+
+
+
+<link rel="stylesheet" href="/common/ztree/css/demo.css" type="text/css">
+<link rel="stylesheet" href="/common/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="/common/ztree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/common/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+
+
+<SCRIPT type="text/javascript">
+    <!--
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+
+    var zNodes =[];
+
+    var code;
+
+    function setCheck() {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+                py = "p",
+                sy = "s",
+                pn = "p",
+                sn = "s",
+                type = { "Y":py + sy, "N":pn + sn};
+        zTree.setting.check.chkboxType = type;
+        showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+    }
+    function showCode(str) {
+        if (!code) code = $("#code");
+        code.empty();
+        code.append("<li>"+str+"</li>");
+    }
+
+    $(document).ready(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/basic/findPurviewList.action",
+            dataType:"json",
+            success:function(data){
+                var arr=data.purviewList;
+                for(i=0;i<arr.length;i++){
+                    zNodes[zNodes.length]={id:arr[i].id, pId:arr[i].parentId, name:arr[i].purviewName,open:true};
+                }
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                setCheck();
+                $("#py").bind("change", setCheck);
+                $("#sy").bind("change", setCheck);
+                $("#pn").bind("change", setCheck);
+                $("#sn").bind("change", setCheck);
+            }
+        });
+    });
+    //-->
+</SCRIPT>
 </head>
-<body>
+<body  style="padding-left: 20px;" >
 <h2>角色管理</h2>
 <p></p>
 
@@ -241,7 +241,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="doPurview()">分配权限</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+<div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px;" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">角色信息</div>
     <form id="fm" method="post" name="actor">
         <div class="fitem" style="display: none;">

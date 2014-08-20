@@ -158,42 +158,8 @@
 <div id="dlg" class="easyui-dialog" style="width:900px;height:600px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">问题信息</div>
     <form id="fm" method="post" name="question">
-        <div class="fitem" style="display: none;">
-            <label>问题ID:</label>
-            <input name="id" class="easyui-textbox"  />
-        </div>
         <div class="fitem" style="margin-bottom: 15px;">
-            <label >案例编号:</label>
-            <input name="caseNum" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">案例主题:</label>
-            <input name="caseTitle" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly">
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>客户名称:</label>
-            <input name="clientName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">客户电话:</label>
-            <input name="clientPhone" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>客户地址:</label>
-            <input name="clientAddress" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-            <label style="margin-left: 30px;width: 100px;">提问时间:</label>
-            <input name="askTime" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>发件人:</label>
-            <input name="sender" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">发件人部门:</label>
-            <input name="senderDept" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>发件人传真:</label>
-            <input name="senderFax" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">问题来源:</label>
-            <input name="typeName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>问题内容:</label>
+            <label >问题内容:</label>
             <textarea name="question" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
@@ -204,42 +170,9 @@
             <label >法律依据:</label>
             <textarea name="legalBasis" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
-
         <div class="fitem" style="margin-bottom: 15px;">
-            <label >负责人:</label>
-            <input name="pcharge" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">回复人员:</label>
-            <input name="answerPeo" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>负责人电话:</label>
-            <input name="chargePhone" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">收件人:</label>
-            <input name="addressee" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>回复形式:</label>
-            <input name="shapeName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">回答时间:</label>
-            <input name="answerTime" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>复核人:</label>
-            <input name="fhr" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">复核人意见:</label>
-            <input name="revComment" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label style="width: 100px;" >咨询总监复核人:</label>
-            <input name="zxzjfhr" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">合伙人审核:</label>
-            <input name="hhrshr" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label >收件人传真:</label>
-            <input name="addresseeFax" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
-            <label style="margin-left: 30px;width: 100px;">当前是否适用:</label>
-            <input name="shiyongName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;" readonly="readonly" >
+            <label >当前是否适用:</label>
+            <input name="shiyongName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
         </div>
     </form>
 </div>
