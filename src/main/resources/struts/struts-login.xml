@@ -7,6 +7,10 @@
 
     <package name="login" namespace="/login" extends="struts-default">
 
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+
         <action name="login" class="com.demo.basic.action.LoginAction" method="login">
             <result name="login">/WEB-INF/pages/login/login.jsp</result>
         </action>
@@ -17,11 +21,9 @@
         </action>
 
 
-        <!--<action name="findPurviewList" class="com.demo.basic.action.LoginAction" method="findPurviewList">
-            <result name="findPurviewList" type="json">
-                <param name="purviewVoList">json</param>
-            </result>
-        </action>-->
+        <action name="findUserByUserNameAndPassword" class="com.demo.basic.action.LoginAction" method="findUserByUserNameAndPassword">
+            <result name="findUserByUserNameAndPassword" type="json"></result>
+        </action>
 
     </package>
 

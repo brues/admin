@@ -17,8 +17,27 @@
 
         <script type="text/javascript">
             function login(){
-                $("#loginForm").attr("action","${pageContext.request.contextPath}/login/welcome.action");
-                $("#loginForm").submit();
+                if($("#username").val()==null||$("#username").val()==""){
+                    $.messager.alert('提示框','用户名不能为空！','warning');
+                }else if($("#password").val()==null||$("#password").val()==""){
+                    $.messager.alert('提示框','密码不能为空！','warning');
+                }else{
+                    $.ajax({
+                        url:"${pageContext.request.contextPath}/login/findUserByUserNameAndPassword.action",
+                        data:{userName:$("#username").val(),password:$("#password").val()},
+                        dataType:"json",
+                        success:function(data){
+                            if(data.userList.length==0){
+                                $.messager.alert('提示框','该用户不存在！','warning');
+                            }else if(data.userList.length==1){
+                                $("#loginForm").attr("action","${pageContext.request.contextPath}/login/welcome.action");
+                                $("#loginForm").submit();
+                            }else{
+
+                            }
+                        }
+                    });
+                }
             }
         </script>
         <script type="text/javascript">
@@ -46,11 +65,11 @@
                         <table cellpadding="0" cellspacing="3">
                             <tr>
                                 <td>登录帐号</td>
-                                <td><input name="userName"  /></td>
+                                <td><input id="username" name="userName"  /></td>
                             </tr>
                             <tr>
                                 <td>登录密码</td>
-                                <td><input type="password" name="password"  /></td>
+                                <td><input id="password" type="password" name="password"  /></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>

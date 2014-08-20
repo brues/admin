@@ -23,4 +23,6 @@ public interface UserMapper {
     public void updateUser(User user);
 
     public void deleteUserActorByUserId(Long id);
+
+    public List<User> findListByUserNameAndPassword(User user);
 }

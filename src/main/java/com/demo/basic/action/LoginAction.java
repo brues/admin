@@ -7,6 +7,7 @@ import com.demo.basic.service.PurviewService;
 import com.demo.basic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class LoginAction extends BaseAction {
     private String userName;
     private String password;
     private String treeString;
+    private List<User> userList = new ArrayList<User>();
 
 
 
@@ -33,11 +35,6 @@ public class LoginAction extends BaseAction {
     }
 
     public String welcome() throws Exception {
-        System.out.println("1");
-        System.out.println(userName);
-        System.out.println("2");
-        System.out.println(password);
-        System.out.println("3");
         User user = userService.findByUserNameAndPassword(userName,password);
         if (user == null){
             return "login";
@@ -61,6 +58,11 @@ public class LoginAction extends BaseAction {
             }
             return "welcome";
         }
+    }
+
+    public String findUserByUserNameAndPassword() throws Exception {
+        userList = userService.findListByUserNameAndPassword(userName,password);
+        return "findUserByUserNameAndPassword";
     }
 
 
@@ -95,6 +97,14 @@ public class LoginAction extends BaseAction {
 
     public void setTreeString(String treeString) {
         this.treeString = treeString;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }
 

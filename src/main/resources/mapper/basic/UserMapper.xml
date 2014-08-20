@@ -29,6 +29,10 @@
     <delete id="deleteUserActorByUserId" parameterType="java.lang.Long">
         delete from admin_userActor where userId=#{id}
     </delete>
+
+    <select id="findListByUserNameAndPassword" parameterType="com.demo.basic.entity.User" resultType="com.demo.basic.entity.User">
+        select * from admin_user where userName=#{userName} and password=#{password}
+    </select>
 </mapper>
 
 

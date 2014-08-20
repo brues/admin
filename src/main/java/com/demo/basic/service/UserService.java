@@ -44,4 +44,11 @@ public class UserService {
             userMapper.updateUser(user);
         }
     }
+
+    public List<User> findListByUserNameAndPassword(String userName, String password) {
+        User user = new User();
+        user.setUserName(userName);
+        user.setPassword(password);
+        return userMapper.findListByUserNameAndPassword(user);
+    }
 }
