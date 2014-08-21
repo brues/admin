@@ -5,6 +5,12 @@
 
 <struts>
 
+    <package name="toLogin" namespace="/" extends="struts-default">
+        <action name="" class="com.demo.basic.action.LoginAction" method="toLogin">
+            <result name="toLogin" type="redirect">/login/login.action</result>
+        </action>
+    </package>
+
     <package name="login" namespace="/login" extends="struts-default">
 
         <result-types>

@@ -65,6 +65,10 @@ public class LoginAction extends BaseAction {
         return "findUserByUserNameAndPassword";
     }
 
+    public String toLogin() throws Exception {
+        return "toLogin";
+    }
+
 
 
 
@@ -106,5 +110,7 @@ public class LoginAction extends BaseAction {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
+
+
 }
 
