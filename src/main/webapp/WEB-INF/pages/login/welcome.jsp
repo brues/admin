@@ -50,13 +50,17 @@
             });
         }
     </script>
+
+
+
 </head>
     <body>
         <div class="easyui-layout" style="width:100%;height:100%;">
             <div data-options="region:'north',split:true" title=""  style="width:100%;height:7%;">
                 <a href="${pageContext.request.contextPath}/login/login.action">退出</a>
             </div>
-            <div data-options="region:'south',split:true" title=""  style="width:100%;height:5%;"></div>
+            <div data-options="region:'south',split:true" title=""  style="width:100%;height:5%;">
+            </div>
             <%--<div data-options="region:'east',split:true" title="最近浏览" style="width:13%;"></div>--%>
             <div id="divtreecaidian" data-options="region:'west'" title="菜单" style="width:13%;">
                 <div class="easyui-accordion" data-options="fit:true,border:false">

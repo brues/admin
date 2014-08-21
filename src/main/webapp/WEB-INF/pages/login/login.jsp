@@ -14,7 +14,9 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/common/jquery/jquery.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/plugins/jquery.validatebox.js"></script>
-
+        <style>
+            html,body{width:100%;height:100%;margin:0;padding:0;}
+        </style>
         <script type="text/javascript">
             function login(){
                 if($("#username").val()==null||$("#username").val()==""){
@@ -52,7 +54,7 @@
             }
         </script>
     </head>
-    <body >
+    <body>
         <div class="easyui-window" title="中翰顾问问题搜索系统" style="width:500px;padding:30px 70px 20px 70px" resizable="false" draggable="false" minimizable="false" maximizable="false" data-options="collapsible:false,closable:false">
             <form method="post" id="loginForm">
                 <div style="margin-bottom:10px">
