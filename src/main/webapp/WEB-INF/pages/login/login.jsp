@@ -53,9 +53,17 @@
                 }
             }
         </script>
+        <script>
+            $(document).ready(function(){
+                var height=(parseInt($("body").css("height"))-parseInt($("#loginWindow").css("height")))/2;
+                var width=(parseInt($("body").css("width"))-parseInt($("#loginWindow").css("width")))/2;
+                $("body").css("padding-top",height+"px");
+                $("body").css("padding-left",width+"px");
+            });
+        </script>
     </head>
     <body>
-        <div class="easyui-window" title="中翰顾问问题搜索系统" style="width:500px;padding:30px 70px 20px 70px" resizable="false" draggable="false" minimizable="false" maximizable="false" data-options="collapsible:false,closable:false">
+        <div id="loginWindow" class="easyui-window" title="中翰顾问问题搜索系统" style="width:500px;padding:30px 70px 20px 70px" resizable="false" draggable="false" minimizable="false" maximizable="false" data-options="collapsible:false,closable:false">
             <form method="post" id="loginForm">
                 <div style="margin-bottom:10px">
                     <input class="easyui-textbox" type="text" id="username" name="userName"  style="width:100%;height:40px;padding:12px" data-options="prompt:'用户名',iconCls:'icon-man',iconWidth:38">
