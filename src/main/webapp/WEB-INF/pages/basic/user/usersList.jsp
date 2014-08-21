@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/color.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
 
     <style type="text/css">
         #fm{
@@ -55,7 +54,7 @@
             if (row){
                 $('#dlg').dialog('open').dialog('setTitle','编辑用户');
                 $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/basic/saveOrUpdateUser.action?id='+row.id;
+                url = '${pageContext.request.contextPath}/basic/saveOrUpdateUser.action';
             }
         }
         function saveUser(){
@@ -197,14 +196,14 @@
 <div id="dlg" class="easyui-dialog" style="width:400px;height:320px;padding:10px 20px"
      closed="true" buttons="#dlg-buttons">
     <div class="ftitle">用户信息</div>
-    <form id="fm" method="post" name="user">
+    <form id="fm" method="post">
         <div class="fitem" style="display: none;" >
             <label>id:</label>
             <input name="id" class="easyui-textbox"  >
         </div>
         <div class="fitem">
             <label>用户名:</label>
-            <input name="userName" class="easyui-textbox" required="true" >
+            <input name="userName" class="easyui-textbox" >
         </div>
         <div class="fitem" style="display: none;">
             <label>密码:</label>
@@ -212,7 +211,7 @@
         </div>
         <div class="fitem">
             <label>真实姓名:</label>
-            <input name="trueName" class="easyui-textbox">
+            <input name="trueName" class="easyui-textbox" >
         </div>
         <div class="fitem">
             <label>电话:</label>
@@ -220,7 +219,7 @@
         </div>
         <div class="fitem">
             <label>邮箱:</label>
-            <input name="email" class="easyui-textbox">
+            <input name="email" class="easyui-textbox" >
         </div>
         <div class="fitem" style="display: none;">
             <label>注册日期:</label>
