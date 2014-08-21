@@ -17,6 +17,11 @@
         <style>
             html,body{width:100%;height:100%;margin:0;padding:0;}
         </style>
+        <script>
+            $(document).ready(function(){
+                $(".panel-title").css("text-align","center");
+            });
+        </script>
         <script type="text/javascript">
             function login(){
                 if($("#username").val()==null||$("#username").val()==""){
@@ -32,13 +37,6 @@
                             if(data.userList.length==0){
                                 $.messager.alert('提示框','该用户不存在！','warning');
                             }else if(data.userList.length==1){
-                                if($("#jizhuwo").attr("checked")=="checked"){
-                                    $.cookie("tax_admin_userName",$("#username").val());
-                                    $.cookie("tax_admin_password",$("#password").val());
-                                }else{
-                                    $.cookie("tax_admin_userName",null);
-                                    $.cookie("tax_admin_password",null);
-                                }
                                 $("#loginForm").attr("action","${pageContext.request.contextPath}/login/welcome.action");
                                 $("#loginForm").submit();
                             }else{
@@ -60,18 +58,7 @@
                 }
             }
         </script>
-        <script>
-            $(document).ready(function(){
-                var height=(parseInt($("body").css("height"))-parseInt($("#loginWindow").css("height")))/2;
-                var width=(parseInt($("body").css("width"))-parseInt($("#loginWindow").css("width")))/2;
-                $("body").css("padding-top",height+"px");
-                $("body").css("padding-left",width+"px");
-                if($.cookie("tax_admin_userName")!=null){
-                    $("#username").val($.cookie("tax_admin_userName"));
-                    $("#password").val($.cookie("tax_admin_password"));
-                }
-            });
-        </script>
+
     </head>
     <body>
         <div id="loginWindow" class="easyui-window" title="中翰顾问问题搜索系统" style="width:500px;padding:30px 70px 20px 70px" resizable="false" draggable="false" minimizable="false" maximizable="false" data-options="collapsible:false,closable:false">
@@ -82,9 +69,7 @@
                 <div style="margin-bottom:20px">
                     <input class="easyui-textbox" id="password" type="password" name="password"  style="width:100%;height:40px;padding:12px" data-options="prompt:'密码',iconCls:'icon-lock',iconWidth:38">
                 </div>
-                <div style="margin-bottom:20px">
-                    <input id="jizhuwo" type="checkbox" checked="checked">
-                    <span>记住我</span>
+                <div style="margin-bottom:20px;height: 10px;">
                 </div>
                 <div>
                     <a href="javascript:login()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
