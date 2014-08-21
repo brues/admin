@@ -155,7 +155,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="qsearch()">搜索</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:900px;height:600px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+<div id="dlg" class="easyui-dialog" style="width:900px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">问题信息</div>
     <form id="fm" method="post" name="question">
         <div class="fitem" style="margin-bottom: 15px;">
