@@ -26,4 +26,8 @@ public interface QuestionMapper {
     public void update(Question question);
 
     public void deleteRemarkByQuestionId(Long questionId);
+
+    public void deleteKeyWordByQuestionId(Long id);
+
+    public void deleteReplaceWordByQuestionId(Long id);
 }

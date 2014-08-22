@@ -85,6 +85,8 @@ public class QuestionService {
     public void deleteQuestionById(Long id) {
         questionMapper.deleteQuestionById(id);
         questionMapper.deleteRemarkByQuestionId(id);
+        questionMapper.deleteKeyWordByQuestionId(id);
+        questionMapper.deleteReplaceWordByQuestionId(id);
     }
 
     public void saveOrUpdateQuestion(Long id, String clientName, int caseNum, String clientAddress, String clientPhone,

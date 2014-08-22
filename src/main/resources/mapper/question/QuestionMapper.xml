@@ -45,4 +45,12 @@
     </select>
 
 
+    <delete id="deleteKeyWordByQuestionId" parameterType="java.lang.Long">
+        delete from admin_keyWord where questionId=#{id}
+    </delete>
+
+    <delete id="deleteReplaceWordByQuestionId" parameterType="java.lang.Long">
+        delete from admin_wordReplace where questionId=#{id}
+    </delete>
+
 </mapper>
