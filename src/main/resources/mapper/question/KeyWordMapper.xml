@@ -4,5 +4,19 @@
 
 <mapper namespace="com.demo.question.mapper.KeyWordMapper">
 
+    <select id="findKeyWordList" parameterType="java.lang.Long" resultType="com.demo.question.entity.KeyWord">
+        select * from admin_keyWord where questionId=#{questionId}
+    </select>
 
+    <delete id="deleteKeyWordById" parameterType="java.lang.Long">
+        delete from admin_keyWord where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.KeyWord">
+        insert into admin_keyWord(questionId,keyWord) values(#{questionId},#{keyWord})
+    </insert>
+
+    <update id="update" parameterType="com.demo.question.entity.KeyWord">
+        update admin_keyWord set keyWord=#{keyWord} where id=#{id}
+    </update>
 </mapper>

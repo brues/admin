@@ -109,5 +109,26 @@
 
 
 
+
+
+
+
+        <action name="keyWordList" class="com.demo.question.action.KeyWordAction" method="keyWordList">
+            <result name="keyWordList">/WEB-INF/pages/question/keyWord/keyWordList.jsp</result>
+        </action>
+
+        <action name="findKeyWordList" class="com.demo.question.action.KeyWordAction" method="findKeyWordList">
+            <result name="findKeyWordList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+        <action name="deleteKeyWordById" class="com.demo.question.action.KeyWordAction" method="deleteKeyWordById">
+            <result name="deleteKeyWordById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateKeyWord" class="com.demo.question.action.KeyWordAction" method="saveOrUpdateKeyWord">
+            <result name="saveOrUpdateKeyWord" type="json"></result>
+        </action>
     </package>
 </struts>

@@ -44,14 +44,14 @@
         function newKeyWord(){
             $('#dlg').dialog('open').dialog('setTitle','添加关键字');
             $('#fm').form('clear');
-            url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action';
+            url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action?questionId='+$("#questionId").val();
         }
         function editKeyWord(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $('#dlg').dialog('open').dialog('setTitle','编辑关键字');
                 $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action';
+                url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action?questionId='+$("#questionId").val();
             }
         }
         function saveKeyWord(){
@@ -96,7 +96,7 @@
 
         function dataLoads(){
             $.ajax({
-                url:"${pageContext.request.contextPath}/que/findKeyWordList.action",
+                url:"${pageContext.request.contextPath}/que/findKeyWordList.action?questionId="+$("#questionId").val(),
                 dataType:"json",
                 success:function(data){
                     $('#dg').datagrid({
@@ -112,23 +112,22 @@
 <body>
 <h2>关键字管理</h2>
 <p></p>
-
+<input type="hidden" id="questionId" value="${questionId}" />
 <table id="dg" title="关键字列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="id" width="50" align="center">关键字ID</th>
-        <th field="name" width="50" align="center">关键字类型</th>
+        <th field="questionId" width="50" align="center">问题ID</th>
+        <th field="keyWord" width="50" align="center">关键字</th>
     </tr>
     </thead>
 </table>
-<%--<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
-     data-options="total:2000,pageSize:10">
-</div>--%>
+
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newKeyWord()">添加关键字</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editKeyWord()">编辑关键字</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyKeyWord()">删除关键字</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="history.go(-1)">返回</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
@@ -138,9 +137,10 @@
             <label>关键字ID:</label>
             <input name="id" class="easyui-textbox">
         </div>
+
         <div class="fitem">
             <label>关键字类型:</label>
-            <input name="name" class="easyui-textbox">
+            <input name="keyWord" class="easyui-textbox">
         </div>
     </form>
 </div>
