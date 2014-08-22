@@ -1,10 +1,13 @@
 package com.demo.question.service;
 
 import com.demo.question.entity.Question;
+import com.demo.question.entity.WordReplace;
 import com.demo.question.mapper.QuestionMapper;
+import com.demo.question.mapper.WordReplaceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +19,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private WordReplaceMapper wordReplaceMapper;
 
     public List<Question> searchQuestionList(){
         List<Question> questionList = questionMapper.searchQuestionList();
@@ -31,8 +37,9 @@ public class QuestionService {
 
     public List<Question> searchResultList(String key){
 
+        List<Question> questionList = null;
         if (key==null||key.equals("")){
-            List<Question> questionList = questionMapper.searchQuestionList();
+            questionList = questionMapper.searchQuestionList();
             for (int i = 0; i < questionList.size(); i++) {
                 if (questionList.get(i).getDqsfsy().equals("1")){
                     questionList.get(i).setShiyongName("适用");
@@ -40,9 +47,8 @@ public class QuestionService {
                     questionList.get(i).setShiyongName("不适用");
                 }
             }
-            return questionList;
         }else{
-            List<Question> questionList = questionMapper.searchResultList(key);
+            questionList = questionMapper.searchResultList(key);
             for (int i = 0; i < questionList.size(); i++) {
                 if (questionList.get(i).getDqsfsy().equals("1")){
                     questionList.get(i).setShiyongName("适用");
@@ -50,8 +56,26 @@ public class QuestionService {
                     questionList.get(i).setShiyongName("不适用");
                 }
             }
-            return questionList;
+
         }
+
+        List<Question> questions = new ArrayList<Question>();
+
+        for (int i = 0; i < questionList.size(); i++) {
+            Question question = questionList.get(i);
+            List<WordReplace> wordReplaces = wordReplaceMapper.findWordReplaceList(question.getId());
+            for (int j = 0; j < wordReplaces.size(); j++) {
+                WordReplace wordReplace = wordReplaces.get(j);
+                question.setQuestion(question.getQuestion().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+                question.setAnswer(question.getAnswer().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+                question.setLegalBasis(question.getLegalBasis().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+            }
+            questions.add(question);
+
+        }
+
+
+        return questions;
     }
 
     public List<Question> findQuestionList() {
