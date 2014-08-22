@@ -124,6 +124,13 @@
                 window.location.href="${pageContext.request.contextPath}/que/keyWordList.action?questionId="+row.id;
             }
         }
+
+        function searchQuestionReplaceWord(){
+            var row = $('#dg').datagrid('getSelected');
+            if (row){
+                window.location.href="${pageContext.request.contextPath}/que/wordReplaceList.action?questionId="+row.id;
+            }
+        }
     </script>
 
 
@@ -171,6 +178,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyQuestion()">删除问题</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchQuestionReamrk()">查看问题备注</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchQuestionKeyWord()">查看问题关键字</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchQuestionReplaceWord()">查看问题替换字</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:900px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">

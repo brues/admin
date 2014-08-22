@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.question.mapper.WordReplaceMapper">
+
+    <select id="findWordReplaceList" parameterType="java.lang.Long" resultType="com.demo.question.entity.WordReplace">
+      select * from admin_wordReplace where questionId=#{questionId}
+    </select>
+
+    <delete id="deleteWordReplaceById" parameterType="java.lang.Long">
+      delete from admin_wordReplace where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.WordReplace">
+      insert into admin_wordReplace(questionId,word,replaceWord) values(#{questionId},#{word},#{replaceWord})
+    </insert>
+
+    <update id="update" parameterType="com.demo.question.entity.WordReplace">
+      update admin_wordReplace set word=#{word},replaceWord=#{replaceWord} where id=#{id}
+    </update>
+
+</mapper>

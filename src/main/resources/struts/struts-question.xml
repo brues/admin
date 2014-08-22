@@ -130,5 +130,27 @@
         <action name="saveOrUpdateKeyWord" class="com.demo.question.action.KeyWordAction" method="saveOrUpdateKeyWord">
             <result name="saveOrUpdateKeyWord" type="json"></result>
         </action>
+
+
+
+
+
+        <action name="wordReplaceList" class="com.demo.question.action.WordReplaceAction" method="wordReplaceList">
+            <result name="wordReplaceList">/WEB-INF/pages/question/wordReplace/wordReplaceList.jsp</result>
+        </action>
+
+        <action name="findWordReplaceList" class="com.demo.question.action.WordReplaceAction" method="findWordReplaceList">
+            <result name="findWordReplaceList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+        <action name="deleteWordReplaceById" class="com.demo.question.action.WordReplaceAction" method="deleteWordReplaceById">
+            <result name="deleteWordReplaceById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateWordReplace" class="com.demo.question.action.WordReplaceAction" method="saveOrUpdateWordReplace">
+            <result name="saveOrUpdateWordReplace" type="json"></result>
+        </action>
     </package>
 </struts>
