@@ -141,7 +141,7 @@
     <thead>
     <tr>
         <th field="caseTitle" width="50" align="center">问题主题</th>
-        <th field="clientName" width="50" align="center">问题内容</th>
+        <th field="shiyongName" width="50" align="center">是否适用</th>
     </tr>
     </thead>
 </table>
