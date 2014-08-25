@@ -19,6 +19,11 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
 
+    <script language="Javascript">
+        document.oncontextmenu=new Function("event.returnValue=false");
+        document.onselectstart=new Function("event.returnValue=false");
+    </script>
+
     <style type="text/css">
         #fm{
             margin:0;
@@ -132,7 +137,7 @@
     </script>
 
 </head>
-<body>
+<body oncopy="alert('对不起，禁止复制！');return false;">
 <h2>问题搜索</h2>
 <p></p>
 
@@ -159,7 +164,7 @@
     <div class="ftitle">问题信息</div>
     <form id="fm" method="post" name="question">
         <div class="fitem" style="margin-bottom: 15px;">
-            <label >问题内容:</label>
+            <label>问题内容:</label>
             <textarea name="question" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
@@ -172,7 +177,7 @@
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
             <label >当前是否适用:</label>
-            <input name="shiyongName" class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
+            <input name="shiyongName" disabled="true"   class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
         </div>
     </form>
 </div>
