@@ -41,7 +41,7 @@
     <select id="searchResultList" parameterType="java.lang.String" resultType="com.demo.question.entity.Question">
         select a.*,(select name from admin_type b where b.id=a.typeId) typeName,
         (select shape from admin_ansShape c where c.id=a.ansShapeId) shapeName from admin_question a
-        where a.caseTitle like CONCAT('%',#{key},'%')
+        where a.caseTitle like CONCAT('%',#{key},'%') or #{key} in (select keyWord from admin_keyWord where keyWord=#{key} and questionId=a.id)
     </select>
 
 
