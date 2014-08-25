@@ -27,7 +27,13 @@ public class UserService {
     }
 
     public List<User> userList() {
-        return userMapper.userList();
+        List<User> userList = userMapper.userList();
+        for (int i = 0; i < userList.size(); i++) {
+            if(userList.get(i).getComments().equals("null")){
+                userList.get(i).setComments("");
+            }
+        }
+        return userList;
     }
 
     public void deleteUserById(Long id) {

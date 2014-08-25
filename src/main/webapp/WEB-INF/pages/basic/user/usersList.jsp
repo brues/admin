@@ -203,23 +203,23 @@
         </div>
         <div class="fitem">
             <label>用户名:</label>
-            <input name="userName" class="easyui-textbox" >
+            <input name="userName" class="easyui-textbox" required="true" >
         </div>
         <div class="fitem" style="display: none;">
             <label>密码:</label>
-            <input name="password" class="easyui-textbox"  >
+            <input name="password" class="easyui-textbox" >
         </div>
         <div class="fitem">
             <label>真实姓名:</label>
-            <input name="trueName" class="easyui-textbox" >
+            <input name="trueName" class="easyui-textbox" required="true">
         </div>
         <div class="fitem">
             <label>电话:</label>
-            <input name="phone" class="easyui-textbox">
+            <input name="phone" class="easyui-textbox" required="true">
         </div>
         <div class="fitem">
             <label>邮箱:</label>
-            <input name="email" class="easyui-textbox" >
+            <input name="email" class="easyui-textbox" required="true" validType="email">
         </div>
         <div class="fitem" style="display: none;">
             <label>注册日期:</label>
