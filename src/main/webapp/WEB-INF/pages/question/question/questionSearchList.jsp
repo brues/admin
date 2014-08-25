@@ -138,6 +138,9 @@
 
 </head>
 <body oncopy="alert('对不起，禁止复制！');return false;">
+<noscript>
+    <iframe scr="*.htm"></iframe>
+</noscript>
 <h2>问题搜索</h2>
 <p></p>
 
