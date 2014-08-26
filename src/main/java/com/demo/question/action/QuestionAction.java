@@ -83,6 +83,10 @@ public class QuestionAction extends BaseAction {
         return "searchList";
     }
 
+    public String inSearchList() throws Exception {
+        return "inSearchList";
+    }
+
     public String findQuestionList() throws Exception {
         List<Question> questionList = questionService.findQuestionList();
         map.put("total",questionList.size());
@@ -341,4 +345,6 @@ public class QuestionAction extends BaseAction {
     public void setKey(String key) {
         this.key = key;
     }
+
+
 }

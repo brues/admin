@@ -86,6 +86,10 @@
             <result name="searchList">/WEB-INF/pages/question/question/questionSearchList.jsp</result>
         </action>
 
+        <action name="inSearchList" class="com.demo.question.action.QuestionAction" method="inSearchList">
+            <result name="inSearchList">/WEB-INF/pages/question/question/questionInsideList.jsp</result>
+        </action>
+
         <action name="findQuestionList" class="com.demo.question.action.QuestionAction" method="findQuestionList">
             <result name="findQuestionList" type="json"><param name="map">json</param></result>
         </action>
