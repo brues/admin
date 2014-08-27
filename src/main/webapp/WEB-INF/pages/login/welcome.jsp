@@ -26,11 +26,19 @@
                 url:"${pageContext.request.contextPath}/que/findNoticeList.action",
                 dataType:"json",
                 success:function(data){
-                    $.messager.show({
-                        title:'通告',
-                        msg:data.map.rows[data.map.rows.length-1].notice,
-                        showType:'show'
-                    });
+                    if(data.map.rows.length>0){
+                        $.messager.show({
+                            title:'通告',
+                            msg:data.map.rows[data.map.rows.length-1].notice,
+                            showType:'show'
+                        });
+                    }else{
+                        $.messager.show({
+                            title:'通告',
+                            msg:'近期无通告！',
+                            showType:'show'
+                        });
+                    }
                 }
             });
 
