@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.question.mapper.NoticeMapper">
+
+   <select id="findNoticeList" resultType="com.demo.question.entity.Notice">
+       select * from admin_notice
+   </select>
+
+    <delete id="deleteNoticeById" parameterType="java.lang.Long">
+        delete from admin_notice where id=#{id}
+    </delete>
+
+    <insert id="add" parameterType="com.demo.question.entity.Notice">
+        insert into admin_notice(nTime,notice) values(#{nTime},#{notice})
+    </insert>
+
+    <update id="update" parameterType="com.demo.question.entity.Notice">
+        update admin_notice set notice=#{notice} where id=#{id}
+    </update>
+
+</mapper>

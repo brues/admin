@@ -156,5 +156,30 @@
         <action name="saveOrUpdateWordReplace" class="com.demo.question.action.WordReplaceAction" method="saveOrUpdateWordReplace">
             <result name="saveOrUpdateWordReplace" type="json"></result>
         </action>
+
+
+
+
+
+
+
+        <action name="noticeList" class="com.demo.question.action.NoticeAction" method="noticeList">
+            <result name="noticeList">/WEB-INF/pages/question/notice/noticeList.jsp</result>
+        </action>
+
+        <action name="findNoticeList" class="com.demo.question.action.NoticeAction" method="findNoticeList">
+            <result name="findNoticeList" type="json">
+                <param name="map">json</param>
+            </result>
+        </action>
+
+        <action name="deleteNoticeById" class="com.demo.question.action.NoticeAction" method="deleteNoticeById">
+            <result name="deleteNoticeById" type="json"></result>
+        </action>
+
+        <action name="saveOrUpdateNotice" class="com.demo.question.action.NoticeAction" method="saveOrUpdateNotice">
+            <result name="saveOrUpdateNotice" type="json"></result>
+        </action>
+
     </package>
 </struts>

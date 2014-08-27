@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -18,8 +18,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
-
-
 
     <style type="text/css">
         #fm{
@@ -51,6 +49,9 @@
             if (row){
                 $('#dlg').dialog('open').dialog('setTitle','查看问题');
                 $('#fm').form('load',row);
+                $("#showTex1div").html($("#showTex1").val());
+                $("#showTex2div").html($("#showTex2").val());
+                $("#showTex3div").html($("#showTex3").val());
             }
         }
         <%-- function newQuestion(){
@@ -102,6 +103,7 @@
 
 
         $(function(){
+
             dataLoads();
         });
 
@@ -112,8 +114,8 @@
                 success:function(data){
                     $('#dg').datagrid({
                         data:data.map
-
                     })
+
                 }
             });
         }
@@ -163,21 +165,29 @@
 <div id="dlg" class="easyui-dialog" style="width:900px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
     <div class="ftitle">问题信息</div>
     <form id="fm" method="post" name="question">
-        <div class="fitem" style="margin-bottom: 15px;">
+        <div class="fitem" style="margin-bottom: 15px;display: none;">
             <label>问题内容:</label>
-            <textarea name="question" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
+            <textarea id="showTex1"  name="question" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
-        <div class="fitem" style="margin-bottom: 15px;">
+        <h1>问题内容：</h1>
+        <div id="showTex1div" ></div>
+        <div class="fitem" style="margin-bottom: 15px;display: none;">
             <label>回复内容:</label>
-            <textarea name="answer" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
+            <textarea id="showTex2" name="answer" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
-        <div class="fitem" style="margin-bottom: 15px;">
+        <h1>回复内容：</h1>
+        <div id="showTex2div" ></div>
+        <div class="fitem" style="margin-bottom: 15px;display: none;">
             <label >法律依据:</label>
-            <textarea name="legalBasis" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
+            <textarea id="showTex3" name="legalBasis" class="easyui-textarea" style="width: 660px;height: 100px;" readonly="readonly"></textarea>
         </div>
+        <h1>法律依据：</h1>
+        <div id="showTex3div" ></div>
+        <br/>
+        <br/>
         <div class="fitem" style="margin-bottom: 15px;">
-            <label >当前是否适用:</label>
-            <input name="shiyongName" disabled="true"   class="easyui-textbox" style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
+            <h1 >当前是否适用:</h1>
+            <input name="shiyongName" disabled="true"  style="width: 260px;height: 30px;border: 0;"  readonly="readonly">
         </div>
     </form>
 </div>

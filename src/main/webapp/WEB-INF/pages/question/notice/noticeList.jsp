@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>问题关键字</title>
+    <title>问题通知栏</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/themes/icon.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/easyui/demo/demo.css"/>
@@ -41,20 +41,20 @@
 
     <script type="text/javascript">
         var url;
-        function newKeyWord(){
-            $('#dlg').dialog('open').dialog('setTitle','添加关键字');
+        function newNotice(){
+            $('#dlg').dialog('open').dialog('setTitle','添加通知');
             $('#fm').form('clear');
-            url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action?questionId='+$("#questionId").val();
+            url = '${pageContext.request.contextPath}/que/saveOrUpdateNotice.action';
         }
-        function editKeyWord(){
+        function editNotice(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $('#dlg').dialog('open').dialog('setTitle','编辑关键字');
+                $('#dlg').dialog('open').dialog('setTitle','编辑通知');
                 $('#fm').form('load',row);
-                url = '${pageContext.request.contextPath}/que/saveOrUpdateKeyWord.action?questionId='+$("#questionId").val();
+                url = '${pageContext.request.contextPath}/que/saveOrUpdateNotice.action';
             }
         }
-        function saveKeyWord(){
+        function saveNotice(){
             $('#fm').form('submit',{
                 url: url,
                 onSubmit: function(){
@@ -66,14 +66,14 @@
                 }
             });
         }
-        function destroyKeyWord(){
+        function destroyNotice(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $.messager.confirm('提示框','确定删除此记录吗?',function(r){
                     if (r){
 
                         $.ajax({
-                            url:"${pageContext.request.contextPath}/que/deleteKeyWordById.action",
+                            url:"${pageContext.request.contextPath}/que/deleteNoticeById.action",
                             data:{id:row.id},
                             success:function(data){
                                 dataLoads();
@@ -96,7 +96,7 @@
 
         function dataLoads(){
             $.ajax({
-                url:"${pageContext.request.contextPath}/que/findKeyWordList.action?questionId="+$("#questionId").val(),
+                url:"${pageContext.request.contextPath}/que/findNoticeList.action",
                 dataType:"json",
                 success:function(data){
                     $('#dg').datagrid({
@@ -110,42 +110,40 @@
 
 </head>
 <body>
-<h2>关键字管理</h2>
+<h2>通知管理</h2>
 <p></p>
-<input type="hidden" id="questionId" value="${questionId}" />
-<table id="dg" title="关键字列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
+<table id="dg" title="通知列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="questionId" width="50" align="center">问题ID</th>
-        <th field="keyWord" width="50" align="center">关键字</th>
+        <th field="nTime" width="50" align="center">原字符</th>
+        <th field="notice" width="50" align="center">通知</th>
     </tr>
     </thead>
 </table>
 
 <div id="toolbar">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newKeyWord()">添加关键字</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editKeyWord()">编辑关键字</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyKeyWord()">删除关键字</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="history.go(-1)">返回</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newNotice()">添加通知</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editNotice()">编辑通知</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyNotice()">删除通知</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:200px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
-    <div class="ftitle">关键字信息</div>
-    <form id="fm" method="post" name="keyWord">
+    <div class="ftitle">通知信息</div>
+    <form id="fm" method="post" name="notice">
         <div class="fitem" style="display: none;">
-            <label>关键字ID:</label>
+            <label>通知ID:</label>
             <input name="id" class="easyui-textbox">
         </div>
 
         <div class="fitem">
-            <label>关键字:</label>
-            <input name="keyWord" class="easyui-textbox">
+            <label>通知:</label>
+            <input name="notice" class="easyui-textbox">
         </div>
     </form>
 </div>
 <div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveKeyWord()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveNotice()" style="width:90px">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 </div>
 </body>

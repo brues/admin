@@ -20,6 +20,23 @@
         html,body{width:100%;height:100%;margin:0;padding:0;}
     </style>
     <script>
+
+        $(document).ready(function(){
+            $.ajax({
+                url:"${pageContext.request.contextPath}/que/findNoticeList.action",
+                dataType:"json",
+                success:function(data){
+                    $.messager.show({
+                        title:'通告',
+                        msg:data.map.rows[data.map.rows.length-1].notice,
+                        showType:'show'
+                    });
+                }
+            });
+
+
+        });
+
         function addPanel(id) {
 
             $.ajax({
@@ -56,7 +73,8 @@
 </head>
     <body>
         <div class="easyui-layout" style="width:100%;height:100%;">
-            <div data-options="region:'north',split:true" title=""  style="width:100%;height:7%;">
+            <div data-options="region:'north',split:true" title=""  style="width:100%;height:7%;text-align: right;padding-right: 15px;padding-top: 10px;">
+                <label>用户：</label><span style="margin-right: 20px;">${admin_user.userName}</span>
                 <a href="${pageContext.request.contextPath}/login/login.action">退出</a>
             </div>
             <div data-options="region:'south',split:true" title=""  style="width:100%;height:5%;">
