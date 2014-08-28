@@ -25,25 +25,53 @@ public class KeyWordService {
         keyWordMapper.deleteKeyWordById(id);
     }
 
-    public void saveOrUpdateKeyWord(Long id, Long questionId, String keyWord) {
-        KeyWord keyWords = new KeyWord();
-
-        if (questionId!=null&&questionId!=0l){
-            keyWords.setQuestionId(questionId);
-        }else {
-            keyWords.setQuestionId(0l);
-        }
-        if (keyWord!=null){
-            keyWords.setKeyWord(keyWord);
-        }else {
-            keyWords.setKeyWord("null");
-        }
-
+    public void saveOrUpdateKeyWord(Long id, Long questionId, String keyWord, String[] anshuizhong, String[] anredianwenti) {
         if (id!=null&&id!=0){
-            keyWords.setId(id);
-            keyWordMapper.update(keyWords);
+            KeyWord keyWords1 = new KeyWord();
+            keyWords1.setId(id);
+            keyWords1.setQuestionId(questionId);
+            if (keyWord!=null){
+                keyWords1.setKeyWord(keyWord);
+            }else{
+                keyWords1.setKeyWord("null");
+            }
+            if (keyWordMapper.findByQuestionIdAndKeyword(keyWords1).size()<=0){
+                keyWordMapper.update(keyWords1);
+            }
         }else{
-            keyWordMapper.add(keyWords);
+
+            if (anredianwenti!=null&&anredianwenti.length>0){
+                for (int i = 0; i < anredianwenti.length; i++) {
+                    KeyWord keyWords3 = new KeyWord();
+                    keyWords3.setQuestionId(questionId);
+                    keyWords3.setKeyWord(anredianwenti[i]);
+                    if (keyWordMapper.findByQuestionIdAndKeyword(keyWords3).size()<=0) {
+                        keyWordMapper.add(keyWords3);
+                    }
+                }
+            }
+            if (anshuizhong!=null&&anshuizhong.length>0){
+                for (int i = 0; i < anshuizhong.length; i++) {
+                    KeyWord keyWords4 = new KeyWord();
+                    keyWords4.setQuestionId(questionId);
+                    keyWords4.setKeyWord(anshuizhong[i]);
+                    if (keyWordMapper.findByQuestionIdAndKeyword(keyWords4).size()<=0) {
+                        keyWordMapper.add(keyWords4);
+                    }
+                }
+            }
+            if (keyWord!=null&&!keyWord.equals("")){
+                KeyWord keyWords2 = new KeyWord();
+                keyWords2.setQuestionId(questionId);
+                keyWords2.setKeyWord(keyWord);
+                if (keyWordMapper.findByQuestionIdAndKeyword(keyWords2).size()<=0) {
+                    keyWordMapper.add(keyWords2);
+                }
+            }
+
+
         }
     }
+
+
 }

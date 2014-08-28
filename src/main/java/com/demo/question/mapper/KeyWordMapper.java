@@ -19,4 +19,6 @@ public interface KeyWordMapper {
     public void update(KeyWord keyWords);
 
     public void add(KeyWord keyWords);
+
+    public List<KeyWord> findByQuestionIdAndKeyword(KeyWord keyWord);
 }

@@ -19,6 +19,9 @@ public class KeyWordAction extends BaseAction {
     private Long questionId;
     private String keyWord;
 
+    private String[] anshuizhong;
+    private String[] anredianwenti;
+
     Map map = new HashMap();
 
 
@@ -43,7 +46,7 @@ public class KeyWordAction extends BaseAction {
     }
 
     public String saveOrUpdateKeyWord() throws Exception {
-        keyWordService.saveOrUpdateKeyWord(id,questionId,keyWord);
+        keyWordService.saveOrUpdateKeyWord(id,questionId,keyWord,anshuizhong,anredianwenti);
         return "saveOrUpdateKeyWord";
     }
 
@@ -79,5 +82,19 @@ public class KeyWordAction extends BaseAction {
         this.map = map;
     }
 
+    public String[] getAnshuizhong() {
+        return anshuizhong;
+    }
 
+    public void setAnshuizhong(String[] anshuizhong) {
+        this.anshuizhong = anshuizhong;
+    }
+
+    public String[] getAnredianwenti() {
+        return anredianwenti;
+    }
+
+    public void setAnredianwenti(String[] anredianwenti) {
+        this.anredianwenti = anredianwenti;
+    }
 }

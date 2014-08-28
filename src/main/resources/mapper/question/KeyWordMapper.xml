@@ -19,4 +19,8 @@
     <update id="update" parameterType="com.demo.question.entity.KeyWord">
         update admin_keyWord set keyWord=#{keyWord} where id=#{id}
     </update>
+
+    <select id="findByQuestionIdAndKeyword" parameterType="com.demo.question.entity.KeyWord" resultType="com.demo.question.entity.KeyWord">
+        select * from admin_keyWord a where a.questionId=#{questionId} and a.keyWord=#{keyWord}
+    </select>
 </mapper>
