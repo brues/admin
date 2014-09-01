@@ -1,8 +1,10 @@
 package com.demo.basic.action;
 
 import com.demo.base.action.BaseAction;
+import com.demo.basic.entity.Actor;
 import com.demo.basic.entity.Purview;
 import com.demo.basic.entity.User;
+import com.demo.basic.service.ActorService;
 import com.demo.basic.service.PurviewService;
 import com.demo.basic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class LoginAction extends BaseAction {
 
+
     private String userName;
     private String password;
     private String treeString;
@@ -30,6 +33,9 @@ public class LoginAction extends BaseAction {
     @Autowired
     private PurviewService purviewService;
 
+    @Autowired
+    private ActorService actorService;
+
     public String login() {
         return "login";
     }
@@ -39,24 +45,29 @@ public class LoginAction extends BaseAction {
         if (user == null){
             return "login";
         }else{
-            session.setAttribute("admin_user",user);
-            treeString="";
-            List<Purview> purviewList = purviewService.findByUserIdAndParentId(user.getId(),0l);
-            for (int i = 0; i < purviewList.size(); i++) {
-                List<Purview> purviews = purviewService.findByUserIdAndParentId(user.getId(),purviewList.get(i).getId());
-                if (purviews.size()>0){
-                    treeString+="<div title=\""+purviewList.get(i).getPurviewName()+"\"  style=\"padding:10px;\">";
+            Actor actor = actorService.findActorByUserId(user.getId());
+            if(actor.getActorName().equals("客户")){
+                return "front";
+            }else{
+                session.setAttribute("admin_user",user);
+                treeString="";
+                List<Purview> purviewList = purviewService.findByUserIdAndParentId(user.getId(),0l);
+                for (int i = 0; i < purviewList.size(); i++) {
+                    List<Purview> purviews = purviewService.findByUserIdAndParentId(user.getId(),purviewList.get(i).getId());
+                    if (purviews.size()>0){
+                        treeString+="<div title=\""+purviewList.get(i).getPurviewName()+"\"  style=\"padding:10px;\">";
 
-                    for (int j = 0; j < purviews.size(); j++) {
-                        treeString+="<p>";
-                        treeString+="<a href='javascript:addPanel("+purviews.get(j).getId()+")'>"+purviews.get(j).getPurviewName()+"</a>";
-                        treeString+="</p>";
+                        for (int j = 0; j < purviews.size(); j++) {
+                            treeString+="<p>";
+                            treeString+="<a href='javascript:addPanel("+purviews.get(j).getId()+")'>"+purviews.get(j).getPurviewName()+"</a>";
+                            treeString+="</p>";
+                        }
+
+                        treeString+="</div>";
                     }
-
-                    treeString+="</div>";
                 }
+                return "welcome";
             }
-            return "welcome";
         }
     }
 

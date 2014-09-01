@@ -121,6 +121,19 @@ public class QuestionAction extends BaseAction {
         return "saveOrUpdateQuestion";
     }
 
+    public String frontList() throws Exception {
+        return "frontList";
+    }
+
+    public String detailQue() throws Exception {
+        return "detailQue";
+    }
+
+
+
+
+
+
     public Map getMap() {
         return map;
     }
@@ -345,6 +358,7 @@ public class QuestionAction extends BaseAction {
     public void setKey(String key) {
         this.key = key;
     }
+
 
 
 }

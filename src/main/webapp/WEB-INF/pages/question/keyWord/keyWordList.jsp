@@ -76,6 +76,7 @@
             });
         }
         function destroyKeyWord(){
+            alert()
             var row = $('#dg').datagrid('getSelected');
             if (row){
                 $.messager.confirm('提示框','确定删除此记录吗?',function(r){
@@ -119,24 +120,47 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
+            /*$('#dg').pagination.next(function(){
+                alert(222);
+            });*/
+           /* var p = $('#dg').datagrid('getPager');
+            alert(2)
+            $(p).pagination({
+                pageSize: 10,//每页显示的记录条数，默认为10
+                pageList: [5,10,15],//可以设置每页记录条数的列表
+                beforePageText: '第',//页数文本框前显示的汉字
+                afterPageText: '页    共 {pages} 页',
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+                onBeforeRefresh:function(){
+                    $(this).pagination('loading');
+                    alert('before refresh');
+                    $(this).pagination('loaded');
+                }
+            });*/
 
+
+           /* var pg = $("#dg").datagrid("getPager");
+            if(pg)
+            {
+                $(pg).pagination({
+                    onBeforeRefresh:function(){
+                        alert('before refresh');
+                    },
+                    onRefresh:function(pageNumber,pageSize){
+                        alert(pageNumber);
+                        alert(pageSize);
+                    },
+                    onChangePageSize:function(){
+                        alert('pagesize changed');
+                    },
+                    onSelectPage:function(pageNumber,pageSize){
+                        alert(pageNumber);
+                        alert(pageSize);
+                    }
+                });
+            }*/
         });
 
-        function changes(){
-            if($("#selectTypeChange").val()=='0'){
-                $("#anshuizhong").css("display","block");
-                $("#anredianwenti").css("display","none");
-                $("#qita").css("display","none");
-            }else if(($("#selectTypeChange").val()=='1'){
-                $("#anshuizhong").css("display","none");
-                $("#anredianwenti").css("display","block");
-                $("#qita").css("display","none");
-            }else{
-                $("#anshuizhong").css("display","none");
-                $("#anredianwenti").css("display","none");
-                $("#qita").css("display","block");
-            }
-        }
     </script>
 
 </head>
@@ -144,7 +168,7 @@
 <h2>关键字管理</h2>
 <p></p>
 <input type="hidden" id="questionId" value="${questionId}" />
-<table id="dg" title="关键字列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar" pagination="true"
+<table id="dg" title="关键字列表" class="easyui-datagrid" style="width:900px;height:400px" toolbar="#toolbar"
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
@@ -153,6 +177,12 @@
     </tr>
     </thead>
 </table>
+<div class="easyui-panel" style="width:900px;">
+    <div  class="easyui-pagination" data-options="pageSize:10,pageList:[10,20,30],
+    total: 114,showPageList: true,
+    showRefresh: false,displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+    onChangePageSize:function(){  alert('pageSize changed'); }"></div>
+</div>
 
 <div id="toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newKeyWord()">添加关键字</a>

@@ -110,6 +110,14 @@
             <result name="saveOrUpdateQuestion" type="json"></result>
         </action>
 
+        <action name="frontList" class="com.demo.question.action.QuestionAction" method="frontList">
+            <result name="frontList">/WEB-INF/pages/front/show.jsp</result>
+        </action>
+
+        <action name="detailQue" class="com.demo.question.action.QuestionAction" method="detailQue">
+            <result name="detailQue">/WEB-INF/pages/front/detail.jsp</result>
+        </action>
+
 
 
 

@@ -32,4 +32,8 @@ public class ActorService {
             actorMapper.updateActor(actor);
         }
     }
+
+    public Actor findActorByUserId(Long userId){
+        return actorMapper.findActorByUserId(userId);
+    }
 }

@@ -21,4 +21,6 @@ public interface ActorMapper{
     public void updateActor(Actor actor);
 
     public void deleteActorPurviewByActorId(Long id);
+
+    public Actor findActorByUserId(Long userId);
 }

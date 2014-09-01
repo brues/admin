@@ -24,4 +24,7 @@
         delete from admin_actorPurview where actorId=#{id}
     </delete>
 
+    <select id="findActorByUserId" parameterType="java.lang.Long" resultType="com.demo.basic.entity.Actor">
+        select * from admin_actor a where a.id=(select actorId from admin_userActor where userId=#{userId})
+    </select>
 </mapper>

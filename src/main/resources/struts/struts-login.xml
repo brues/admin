@@ -6,7 +6,7 @@
 <struts>
 
     <package name="toLogin" namespace="/" extends="struts-default">
-        <action name="" class="com.demo.basic.action.LoginAction" method="toLogin">
+        <action name="toLogin" class="com.demo.basic.action.LoginAction" method="toLogin">
             <result name="toLogin" type="redirect">/login/login.action</result>
         </action>
     </package>
@@ -24,6 +24,7 @@
         <action name="welcome" class="com.demo.basic.action.LoginAction" method="welcome">
             <result name="welcome">/WEB-INF/pages/login/welcome.jsp</result>
             <result name="login">/WEB-INF/pages/login/login.jsp</result>
+            <result name="front">/WEB-INF/pages/front/main.jsp</result>
         </action>
 
 
