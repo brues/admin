@@ -73,8 +73,8 @@
             }
         </script>
     </head>
-    <body>
-        <div style="text-align: center;background-color:cornflowerblue;height: 60px;vertical-align: middle;padding-top: 15px;">
+    <body style="background-color: #f1f1f1;">
+        <div style="text-align: center;background-color:cornflowerblue;height: 50px;vertical-align: middle;padding-top: 15px;">
             <form action="/que/frontList.action" >
                 <input id="keyWord" type="text" name="keyWord" value="${map.keyWord}" style="height:35px;width:368px;"/><input type="submit" value="搜索" class="sousuo" />
             </form>
@@ -82,7 +82,7 @@
         <div style="padding-left: 50px;padding-top: 50px;">
             <c:forEach var="que"  items="${map.rows}">
                 <span style="font-size: 20;"><a href="${pageContext.request.contextPath}/que/detailQue.action?id=${que.id}">${que.caseTitle}</a></span>
-                <p style="width:80%;margin-bottom: 30px;">${que.question}</p>
+                <pre style="width:80%;margin-bottom: 30px;">${que.question}</pre>
             </c:forEach>
         </div>
         <div style="padding-left: 50px;padding-top: 10px;margin-bottom: 100px;">

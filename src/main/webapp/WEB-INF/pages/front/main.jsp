@@ -39,11 +39,11 @@
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: #f1f1f1;">
         <div>
-            <img src="/common/admin/front/img/main.jpg" width="100%"/>
+            <img src="/common/admin/front/img/4.jpg" width="100%"/>
         </div>
-        <div style="text-align: center;background-color:cornflowerblue;height: 60px;vertical-align: middle;padding-top: 15px;">
+        <div style="text-align: center;background-color:#2a76db;height: 50px;vertical-align: middle;padding-top: 15px;">
             <form action="/que/frontList.action" >
                 <input type="text" name="keyWord" style="height:35px;width:368px;"/><input type="submit" value="搜索" class="sousuo" />
             </form>

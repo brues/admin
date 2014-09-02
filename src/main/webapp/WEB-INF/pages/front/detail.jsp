@@ -39,8 +39,8 @@
             }
         </style>
     </head>
-    <body>
-        <div style="text-align: center;background-color:cornflowerblue;height: 60px;vertical-align: middle;padding-top: 15px;">
+    <body style="background-color: #f1f1f1;">
+        <div style="text-align: center;background-color:cornflowerblue;height: 50px;vertical-align: middle;padding-top: 15px;">
             <form action="/que/frontList.action" >
                 <input type="text" name="keyWord" style="height:35px;width:368px;"/><input type="submit" value="搜索" class="sousuo" />
             </form>

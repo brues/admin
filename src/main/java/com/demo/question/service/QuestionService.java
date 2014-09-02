@@ -186,7 +186,9 @@ public class QuestionService {
         map.put("keyWord",keyWord);
         map.put("total",questions.size());
         map.put("currentPage",currentPage);
-        if(questions.size()%Integer.parseInt(pageSize)==0){
+        if(questions.size()==0){
+            map.put("totalPage",1);
+        }else if(questions.size()%Integer.parseInt(pageSize)==0){
             map.put("totalPage",questions.size()/Integer.parseInt(pageSize));
         }else{
             map.put("totalPage",questions.size()/Integer.parseInt(pageSize)+1);
