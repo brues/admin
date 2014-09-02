@@ -18,6 +18,9 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/common/easyui/easyloader.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/ueditor/ueditor.all.js"></script>
+
 
     <style type="text/css">
         #fm{
@@ -162,10 +165,9 @@
        rownumbers="true" fitColumns="true" singleSelect="true">
     <thead>
     <tr>
-        <th field="id" width="50" align="center">问题ID</th>
         <th field="caseTitle" width="50" align="center">案例主题</th>
         <th field="clientName" width="50" align="center">客户名称</th>
-        <th field="askTime" width="50" align="center">提问时间</th>
+        <th field="dqsfsy" width="50" align="center">当前是否适用</th>
     </tr>
     </thead>
 </table>
@@ -197,75 +199,39 @@
         <div class="fitem" style="margin-bottom: 15px;">
             <label>客户名称:</label>
             <input name="clientName" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">客户电话:</label>
-            <input name="clientPhone" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>客户地址:</label>
-            <input name="clientAddress" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">提问时间:</label>
-            <input name="askTime" class="easyui-datetimebox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>发件人:</label>
-            <input name="sender" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">发件人部门:</label>
-            <input name="senderDept" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>发件人传真:</label>
-            <input name="senderFax" class="easyui-textbox" style="width: 260px;height: 30px;" >
             <label style="margin-left: 30px;width: 100px;">问题来源:</label>
             <select name="typeId" id="selectTypeId" style="width: 260px;height: 30px;" class="easyui-select">
             </select>
         </div>
+
         <div class="fitem" style="margin-bottom: 15px;">
             <label>问题内容:</label>
-            <textarea name="question" class="easyui-textarea" style="width: 660px;height: 100px;"></textarea>
+            <script type="text/javascript">
+                var ue = UE.getEditor('container').setHeight(300);
+            </script>
+            <!-- 加载编辑器的容器 -->
+            <script id="container" name="question" style="width:750px;" type="text/plain"> </script>
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
             <label>回复内容:</label>
-            <textarea name="answer" class="easyui-textarea" style="width: 660px;height: 100px;"></textarea>
+            <script type="text/javascript">
+                var ue = UE.getEditor('container2').setHeight(300);
+            </script>
+            <!-- 加载编辑器的容器 -->
+            <script id="container2" name="answer" style="width:750px;" type="text/plain"> </script>
         </div>
         <div class="fitem" style="margin-bottom: 15px;">
             <label >法律依据:</label>
-            <textarea name="legalBasis" class="easyui-textarea" style="width: 660px;height: 100px;"></textarea>
+            <script type="text/javascript">
+                var ue = UE.getEditor('container3').setHeight(300);
+            </script>
+            <!-- 加载编辑器的容器 -->
+            <script id="container3" name="legalBasis" style="width:750px;" type="text/plain"> </script>
         </div>
 
         <div class="fitem" style="margin-bottom: 15px;">
             <label >负责人:</label>
             <input name="pcharge" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">回复人员:</label>
-            <input name="answerPeo" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>负责人电话:</label>
-            <input name="chargePhone" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">收件人:</label>
-            <input name="addressee" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>回复形式:</label>
-            <select name="ansShapeId" id="selectAnsShapeId" style="width: 260px;height: 30px;" class="easyui-select">
-            </select>
-            <label style="margin-left: 30px;width: 100px;">回答时间:</label>
-            <input name="answerTime" class="easyui-datetimebox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label>复核人:</label>
-            <input name="fhr" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">复核人意见:</label>
-            <input name="revComment" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label >咨询总监复核人:</label>
-            <input name="zxzjfhr" class="easyui-textbox" style="width: 260px;height: 30px;" >
-            <label style="margin-left: 30px;width: 100px;">合伙人审核:</label>
-            <input name="hhrshr" class="easyui-textbox" style="width: 260px;height: 30px;" >
-        </div>
-        <div class="fitem" style="margin-bottom: 15px;">
-            <label >收件人传真:</label>
-            <input name="addresseeFax" class="easyui-textbox" style="width: 260px;height: 30px;" >
             <label style="margin-left: 30px;width: 100px;">当前是否适用:</label>
             <select name="dqsfsy" style="width: 260px;height: 30px;" >
                 <option value="1" selected="selected">适用</option>
