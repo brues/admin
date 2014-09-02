@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by guoyibin on 8/11/14.
@@ -128,5 +130,78 @@ public class QuestionService {
             questions.setId(id);
             questionMapper.update(questions);
         }
+    }
+
+    public Map  frontList(String keyWord, String pageSize, String currentPage, String totalCount, String totalPage) {
+        if (currentPage==null) currentPage="1";
+        pageSize="10";
+        Map map = new HashMap();
+        List<Question> questionList = null;
+        if (keyWord==null||keyWord.equals("")){
+            questionList = questionMapper.searchQuestionList();
+            for (int i = 0; i < questionList.size(); i++) {
+                if (questionList.get(i).getDqsfsy().equals("1")){
+                    questionList.get(i).setShiyongName("适用");
+                }else {
+                    questionList.get(i).setShiyongName("不适用");
+                }
+            }
+        }else{
+            questionList = questionMapper.searchResultList(keyWord);
+            for (int i = 0; i < questionList.size(); i++) {
+                if (questionList.get(i).getDqsfsy().equals("1")){
+                    questionList.get(i).setShiyongName("适用");
+                }else {
+                    questionList.get(i).setShiyongName("不适用");
+                }
+            }
+
+        }
+
+        List<Question> questions = new ArrayList<Question>();
+
+        for (int i = 0; i < questionList.size(); i++) {
+            Question question = questionList.get(i);
+            List<WordReplace> wordReplaces = wordReplaceMapper.findWordReplaceList(question.getId());
+            for (int j = 0; j < wordReplaces.size(); j++) {
+                WordReplace wordReplace = wordReplaces.get(j);
+                question.setQuestion(question.getQuestion().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+                question.setAnswer(question.getAnswer().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+                question.setLegalBasis(question.getLegalBasis().replace(wordReplace.getWord(),wordReplace.getReplaceWord()));
+            }
+            questions.add(question);
+
+        }
+
+        List<Question> questionss = new ArrayList<Question>();
+
+        int a=(Integer.parseInt(pageSize))*((Integer.parseInt(currentPage))-1);
+        int b=(Integer.parseInt(pageSize))*((Integer.parseInt(currentPage))-1)+4;
+        if (a<0) a=0;
+        if (b>=questions.size()) b=questions.size()-1;
+
+        for (int i = a; i <= b; i++) {
+            questionss.add(questions.get(i));
+        }
+        map.put("keyWord",keyWord);
+        map.put("total",questions.size());
+        map.put("currentPage",currentPage);
+        if(questions.size()%Integer.parseInt(pageSize)==0){
+            map.put("totalPage",questions.size()/Integer.parseInt(pageSize));
+        }else{
+            map.put("totalPage",questions.size()/Integer.parseInt(pageSize)+1);
+        }
+        map.put("rows",questionss);
+        return map;
+    }
+
+    public Question findById(Long id) {
+        Question question = questionMapper.findById(id);
+        if (question.getDqsfsy().equals("0")){
+            question.setDqsfsy("适用");
+        }else {
+            question.setDqsfsy("不适用");
+        }
+        return question;
     }
 }

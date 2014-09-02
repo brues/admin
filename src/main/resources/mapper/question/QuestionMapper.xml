@@ -53,4 +53,7 @@
         delete from admin_wordReplace where questionId=#{id}
     </delete>
 
+    <select id="findById" parameterType="java.lang.Long" resultType="com.demo.question.entity.Question">
+        select * from admin_question where id=#{id}
+    </select>
 </mapper>

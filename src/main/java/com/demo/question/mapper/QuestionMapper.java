@@ -30,4 +30,6 @@ public interface QuestionMapper {
     public void deleteKeyWordByQuestionId(Long id);
 
     public void deleteReplaceWordByQuestionId(Long id);
+
+    public Question findById(Long id);
 }

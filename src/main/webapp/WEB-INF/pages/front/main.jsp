@@ -21,7 +21,7 @@
                 background-color: #38f;
                 font-size: 16px;
                 color: white;
-                font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti
+                font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;
                 align-items: flex-start;
                 text-align: center;
                 box-sizing: border-box;

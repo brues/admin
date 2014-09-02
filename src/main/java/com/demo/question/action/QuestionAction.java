@@ -16,6 +16,13 @@ import java.util.Map;
 public class QuestionAction extends BaseAction {
 
     private Map map = new HashMap();
+    Question questions = new Question();
+
+    private String keyWord;
+    private String currentPage;
+    private String pageSize;
+    private String totalPage;
+    private String totalCount;
 
     private String key;
 
@@ -122,10 +129,12 @@ public class QuestionAction extends BaseAction {
     }
 
     public String frontList() throws Exception {
+        map=questionService.frontList(keyWord,pageSize,currentPage,totalCount,totalPage);
         return "frontList";
     }
 
     public String detailQue() throws Exception {
+        questions = questionService.findById(id);
         return "detailQue";
     }
 
@@ -360,5 +369,51 @@ public class QuestionAction extends BaseAction {
     }
 
 
+    public String getKeyWord() {
+        return keyWord;
+    }
 
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
+    public String getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(String totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public String getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Question getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Question questions) {
+        this.questions = questions;
+    }
 }
